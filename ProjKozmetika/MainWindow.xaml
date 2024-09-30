@@ -7,6 +7,43 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Bal oldali szekció: Szolgáltatás kiválasztása -->
+        <StackPanel Grid.Column="0" Margin="20">
+            <TextBlock Text="Szolgáltatás kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
+            <ComboBox Name="ServiceComboBox" Margin="0 0 0 20"/>
+
+            <TextBlock Text="Dolgozó kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
+            <ComboBox Name="EmployeeComboBox" Margin="0 0 0 20"/>
+
+            <TextBlock Text="Időpont kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
+            <Button Content="Időpont kiválasztása" Height="30" Width="150" Margin="0 0 0 20"/>
+
+        </StackPanel>
+
+        <!-- Jobb oldali szekció: Jelentkezés -->
+        <StackPanel Grid.Column="1" Margin="20">
+            <TextBlock Text="Vezetéknév" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBox Name="LastNameTextBox" Margin="0 0 0 20"/>
+
+            <TextBlock Text="Keresztnév" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBox Name="FirstNameTextBox" Margin="0 0 0 20"/>
+
+            <TextBlock Text="Email cím" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBox Name="EmailTextBox" Margin="0 0 0 20"/>
+
+            <TextBlock Text="Telefonszám" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBox Name="PhoneTextBox" Margin="0 0 0 20"/>
+
+            <Button Content="Jelentkezés elküldése" Width="200" Height="50" Background="DarkSeaGreen"/>
+        </StackPanel>
+
+        <!-- Kép beillesztése -->
+        <Image Grid.Column="1" Source="beauty_facial_image.jpg" Height="150" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 0 20 0"/>
 
     </Grid>
 </Window>
