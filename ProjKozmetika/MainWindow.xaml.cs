@@ -25,7 +25,12 @@ namespace ProjKozmetika
         public MainWindow()
         {
             InitializeComponent();
-            ConnectionAsync();
+            Loaded += MainWindow_LoadedAsync;
+        }
+        
+        private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
+        {
+            await ConnectionAsync();
         }
 
         private async Task<Task> ConnectionAsync()
