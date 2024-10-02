@@ -24,7 +24,7 @@ namespace ProjKozmetika
         private readonly string connectionString = "server=localhost;port=3306;uid=root;database=kozmetika";
         ObservableCollection<Szolgaltatas> szolgatatasok = new ObservableCollection<Szolgaltatas>();
         ObservableCollection<Dolgozo> dolgozok = new ObservableCollection<Dolgozo>();
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -106,33 +106,46 @@ namespace ProjKozmetika
             await conn.CloseAsync();
         }
 
-        private async Task IsCorrectWorkerAsync()
+        private void IsCorrectWorker()
         {
-            var chosenWorker = EmployeeComboBox.SelectedItem.ToString().Split(" ");
-            var chosenService = ServiceComboBox.SelectedItem.ToString();
-            var worker = dolgozok.ToList().Find(x => x.DolgLastName == chosenWorker[0] && x.DolgFirstName == chosenWorker[1]);
-            var service = szolgatatasok.ToList().Find(x => x.SzolgKategoria == chosenService);
+            Dolgozo chosenWorker = (Dolgozo)EmployeeComboBox.SelectedItem;
+            Szolgaltatas chosenService = (Szolgaltatas)ServiceComboBox.SelectedItem;
 
             if (chosenWorker == null || chosenService == null)
             {
                 return;
             }
-            else if (worker.Szolgaltatas != service.SzolgID)
+
+            var worker = dolgozok.ToList().Find(x => x.DolgozoFullName == $"{chosenWorker.DolgLastName} {chosenWorker.DolgFirstName}");
+            var service = szolgatatasok.ToList().Find(x => x.SzolgKategoria == chosenService.SzolgKategoria);
+
+            if (worker == null || service == null)
+            {
+                MessageBox.Show("A kiválasztott dolgozó vagy szolgáltatás nem található.", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (worker.Szolgaltatas != service.SzolgID)
             {
                 MessageBox.Show("Figyelem! Az általad válaszott dolgozó nem biztosítja a válaszott szolgáltatás!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EmployeeComboBox.SelectedItem = null;
+                ServiceComboBox.SelectedItem = null;
             }
-            EmployeeComboBox.SelectedItem = null;
-            ServiceComboBox.SelectedItem = null;
-        }
 
-        private async void EmployeeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        }
+        private  void EmployeeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           await IsCorrectWorkerAsync();
+            if (EmployeeComboBox.SelectedItem != null && ServiceComboBox.SelectedItem != null)
+            {
+                IsCorrectWorker();
+            }
         }
-
         private async void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await IsCorrectWorkerAsync();
+            if (EmployeeComboBox.SelectedItem != null && ServiceComboBox.SelectedItem != null)
+            {
+                IsCorrectWorker();
+            }
         }
     }
 }
