@@ -36,24 +36,10 @@ namespace ProjKozmetika
 
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
-            //await ConnectionAsync();
             await GetServicesAsync();
             await GetWorkersAsync();
         }
 
-        private async Task<Task> ConnectionAsync()
-        {
-            try
-            {
-                conn = new MySqlConnection(connectionString);
-                await conn.OpenAsync();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            return Task.CompletedTask;
-        }
         private async Task GetServicesAsync()
         {
             try
@@ -133,14 +119,14 @@ namespace ProjKozmetika
             }
 
         }
-        private  void EmployeeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void EmployeeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (EmployeeComboBox.SelectedItem != null && ServiceComboBox.SelectedItem != null)
             {
                 IsCorrectWorker();
             }
         }
-        private async void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (EmployeeComboBox.SelectedItem != null && ServiceComboBox.SelectedItem != null)
             {
