@@ -15,10 +15,12 @@
         <!-- Bal oldali szekció: Szolgáltatás kiválasztása -->
         <StackPanel Grid.Column="0" Margin="20">
             <TextBlock Text="Szolgáltatás kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
-            <ComboBox Name="ServiceComboBox" Margin="0 0 0 20"/>
+            <ComboBox Name="ServiceComboBox" Margin="0 0 0 20" ItemsSource="{Binding Szolgaltatasok}" 
+          DisplayMemberPath="SzolgKategoria" SelectionChanged="ServiceComboBox_SelectionChanged"/>
 
             <TextBlock Text="Dolgozó kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
-            <ComboBox Name="EmployeeComboBox" Margin="0 0 0 20"/>
+            <ComboBox Name="EmployeeComboBox" Margin="0 0 0 20" ItemsSource="{Binding Dolgozok}" 
+          DisplayMemberPath="DolgozoFullName" SelectionChanged="EmployeeComboBox_SelectionChanged"/>
 
             <TextBlock Text="Időpont kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
             <Button Content="Időpont kiválasztása" Height="30" Width="150" Margin="0 0 0 20"/>
