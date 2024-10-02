@@ -113,7 +113,11 @@ namespace ProjKozmetika
             var worker = dolgozok.ToList().Find(x => x.DolgLastName == chosenWorker[0] && x.DolgFirstName == chosenWorker[1]);
             var service = szolgatatasok.ToList().Find(x => x.SzolgKategoria == chosenService);
 
-            if (worker.Szolgaltatas != service.SzolgID)
+            if (chosenWorker == null || chosenService == null)
+            {
+                return;
+            }
+            else if (worker.Szolgaltatas != service.SzolgID)
             {
                 MessageBox.Show("Figyelem! Az általad válaszott dolgozó nem biztosítja a válaszott szolgáltatás!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
