@@ -1,18 +1,9 @@
 ﻿using MySqlConnector;
 using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Data;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ProjKozmetika
 {
@@ -123,7 +114,6 @@ namespace ProjKozmetika
                 EmployeeComboBox.SelectedItem = null;
                 ServiceComboBox.SelectedItem = null;
             }
-
         }
         private async void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -138,11 +128,20 @@ namespace ProjKozmetika
             var debug = EmployeeComboBox.SelectedItem;
         }
 
-        private void LastNameTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void PreviewTextRegex(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^a-zA-Z\\P{IsBasicLatin}]+");
             e.Handled = regex.IsMatch(e.Text);
-            
+        }
+
+        private void PreviewAppCommandsExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy ||
+                e.Command == ApplicationCommands.Cut ||
+                e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

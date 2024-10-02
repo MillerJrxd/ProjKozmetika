@@ -30,16 +30,16 @@
         <!-- Jobb oldali szekció: Jelentkezés -->
         <StackPanel Grid.Column="1" Margin="20">
             <TextBlock Text="Vezetéknév" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
-            <TextBox Name="LastNameTextBox" Margin="0 0 0 20" PreviewTextInput="LastNameTextBox_PreviewTextInput"/>
+            <TextBox Name="LastNameTextBox" Margin="0 0 0 20" PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
 
             <TextBlock Text="Keresztnév" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
-            <TextBox Name="FirstNameTextBox" Margin="0 0 0 20"/>
+            <TextBox Name="FirstNameTextBox" Margin="0 0 0 20" PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
 
             <TextBlock Text="Email cím" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
             <TextBox Name="EmailTextBox" Margin="0 0 0 20"/>
 
             <TextBlock Text="Telefonszám" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
-            <TextBox Name="PhoneTextBox" Margin="0 0 0 20"/>
+            <TextBox Name="PhoneTextBox" Margin="0 0 0 20" />
 
             <Button Content="Jelentkezés elküldése" Width="200" Height="50" Background="DarkSeaGreen"/>
         </StackPanel>
