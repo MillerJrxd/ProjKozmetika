@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,12 +33,13 @@ namespace ProjKozmetika
             ServiceComboBox.ItemsSource = szolgatatasok;
             EmployeeComboBox.ItemsSource = dolgozok;
             this.DataContext = this;
+            EmployeeComboBox.IsEnabled = false;
         }
 
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
             await GetServicesAsync();
-            await GetWorkersAsync();
+            //await GetWorkersAsync();
         }
 
         private async Task GetServicesAsync()
@@ -64,7 +66,7 @@ namespace ProjKozmetika
             await conn.CloseAsync();
         }
 
-        private async Task GetWorkersAsync()
+        private async Task GetWorkersAsync(byte ID)
         {
             try
             {
@@ -76,7 +78,7 @@ namespace ProjKozmetika
                 MessageBox.Show(ex.Message, "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            string query = "SELECT dolgozoID, dolgozoFirstName, dolgozoLastName, dolgozoTel, dolgozoEmail, statusz, szolgáltatasa FROM dolgozók";
+            string query = $"SELECT dolgozoID, dolgozoFirstName, dolgozoLastName, dolgozoTel, dolgozoEmail, statusz, szolgáltatasa FROM dolgozók WHERE szolgáltatasa = {ID} ";
 
             var command = new MySqlCommand(query, conn);
             var reader = await command.ExecuteReaderAsync();
@@ -92,6 +94,10 @@ namespace ProjKozmetika
             await conn.CloseAsync();
         }
 
+        /// <summary>
+        /// !!NEM HASZNÁLT KÓD!! 
+        /// Ellenőrzi, hogy a kiválaszott szolgáltatáshoz a megfelelő dolgozó van-e kiválasztva,
+        /// </summary>
         private void IsCorrectWorker()
         {
             Dolgozo chosenWorker = (Dolgozo)EmployeeComboBox.SelectedItem;
@@ -119,19 +125,24 @@ namespace ProjKozmetika
             }
 
         }
+        private async void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EmployeeComboBox.IsEnabled = true;
+            Szolgaltatas selectedItem = (Szolgaltatas)ServiceComboBox.SelectedItem;
+            dolgozok.Clear();
+            await GetWorkersAsync(selectedItem.SzolgID);
+            EmployeeComboBox.SelectedIndex = 0;
+        }
         private void EmployeeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (EmployeeComboBox.SelectedItem != null && ServiceComboBox.SelectedItem != null)
-            {
-                IsCorrectWorker();
-            }
+            var debug = EmployeeComboBox.SelectedItem;
         }
-        private void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void LastNameTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (EmployeeComboBox.SelectedItem != null && ServiceComboBox.SelectedItem != null)
-            {
-                IsCorrectWorker();
-            }
+            Regex regex = new Regex("[^a-zA-Z\\P{IsBasicLatin}]+");
+            e.Handled = regex.IsMatch(e.Text);
+            
         }
     }
 }
