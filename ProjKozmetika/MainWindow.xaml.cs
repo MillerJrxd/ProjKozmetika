@@ -130,7 +130,7 @@ namespace ProjKozmetika
 
         private void PreviewTextRegex(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^a-zA-Z\\P{IsBasicLatin}]+");
+            Regex regex = new Regex(@"[^a-zA-Z\S\P{IsBasicLatin}[(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]]]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
