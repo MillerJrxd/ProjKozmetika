@@ -20,7 +20,7 @@
 
             <TextBlock Text="Dolgozó kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
             <ComboBox Name="EmployeeComboBox" Margin="0 0 0 20" ItemsSource="{Binding Dolgozok}" 
-          DisplayMemberPath="DolgozoFullName" SelectionChanged="EmployeeComboBox_SelectionChanged"/>
+          DisplayMemberPath="DolgozoFullName"/>
 
             <TextBlock Text="Időpont kiválasztása" FontSize="16" FontWeight="Bold" Margin="0 0 0 10" />
             <Button Content="Időpont kiválasztása" Height="30" Width="150" Margin="0 0 0 20"/>
@@ -41,7 +41,7 @@
             <TextBlock Text="Telefonszám" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
             <TextBox Name="PhoneTextBox" Margin="0 0 0 20" />
 
-            <Button Content="Jelentkezés elküldése" Width="200" Height="50" Background="DarkSeaGreen"/>
+            <Button x:Name="btnSubmit" Content="Jelentkezés elküldése" Width="200" Height="50" Background="DarkSeaGreen" Click="btnSubmit_Click"/>
         </StackPanel>
 
         <!-- Kép beillesztése -->

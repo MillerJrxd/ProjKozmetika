@@ -1,5 +1,8 @@
 ﻿using MySqlConnector;
 using System.Collections.ObjectModel;
+using System.Resources;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +19,7 @@ namespace ProjKozmetika
         private readonly string connectionString = "server=localhost;port=3306;uid=root;database=kozmetika";
         ObservableCollection<Szolgaltatas> szolgatatasok = new ObservableCollection<Szolgaltatas>();
         ObservableCollection<Dolgozo> dolgozok = new ObservableCollection<Dolgozo>();
+        ObservableCollection<TimeSpan> times = new ObservableCollection<TimeSpan>();
 
         public MainWindow()
         {
@@ -26,13 +30,11 @@ namespace ProjKozmetika
             this.DataContext = this;
             EmployeeComboBox.IsEnabled = false;
         }
-
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
             await GetServicesAsync();
             //await GetWorkersAsync();
         }
-
         private async Task GetServicesAsync()
         {
             try
@@ -56,7 +58,6 @@ namespace ProjKozmetika
             }
             await conn.CloseAsync();
         }
-
         private async Task GetWorkersAsync(byte ID)
         {
             try
@@ -121,19 +122,14 @@ namespace ProjKozmetika
             Szolgaltatas selectedItem = (Szolgaltatas)ServiceComboBox.SelectedItem;
             dolgozok.Clear();
             await GetWorkersAsync(selectedItem.SzolgID);
+            await TimeFillAsync(selectedItem.SzolgaltatasIdeje);
             EmployeeComboBox.SelectedIndex = 0;
         }
-        private void EmployeeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var debug = EmployeeComboBox.SelectedItem;
-        }
-
         private void PreviewTextRegex(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex(@"[^a-zA-Z\S\P{IsBasicLatin}[(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]]]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
         private void PreviewAppCommandsExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Command == ApplicationCommands.Copy ||
@@ -142,6 +138,42 @@ namespace ProjKozmetika
             {
                 e.Handled = true;
             }
+        }
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(FirstNameTextBox.Text) == true)
+            {
+                MessageBox.Show("Hibás vagy hiányzó vezetéknév!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                FirstNameTextBox.Clear();
+                FirstNameTextBox.Focus();
+            }
+            else if (string.IsNullOrEmpty(LastNameTextBox.Text) == true)
+            {
+                MessageBox.Show("Hibás vagy hiányzó keresztnév!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                LastNameTextBox.Clear();
+                LastNameTextBox.Focus();
+            }
+            else if (string.IsNullOrEmpty(EmailTextBox.Text) == true && !EmailTextBox.Text.Contains('@'))
+            {
+                MessageBox.Show("Hibás vagy hiányzó email cím!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EmailTextBox.Clear();
+                EmailTextBox.Focus();
+            }
+            else if (string.IsNullOrEmpty(PhoneTextBox.Text) == true && PhoneTextBox.Text.Count() != 11)
+            {
+                MessageBox.Show("Hibás vagy hiányzó telefonszám!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                PhoneTextBox.Clear();
+                PhoneTextBox.Focus();
+            }
+            else
+            {
+
+                //?ujablak = new Ujablak(ObservableCollection<Ugyfel> Ugyfel, ObservableCollection<Foglalas> foglalas) 
+            }
+        }
+        private async Task TimeFillAsync(TimeSpan serviceTime)
+        {
+            throw new NotImplementedException();
         }
     }
 }
