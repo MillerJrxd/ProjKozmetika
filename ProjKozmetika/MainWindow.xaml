@@ -67,16 +67,10 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-
-
         </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
-
-
             <ColumnDefinition />
-
         </Grid.ColumnDefinitions>
         <Button Content="Button"  Height="64" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="267" Grid.ColumnSpan="2" />
         <Path Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="500" Grid.RowSpan="7" Stroke="White" Stretch="Fill" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="20">
@@ -95,7 +89,6 @@
         <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="1" VerticalAlignment="Top" Width="96" FontSize="18" Foreground="White" Margin="0,10,0,0"><Run Language="hu-hu" Text="Szolgáltatás"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
         <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="2" VerticalAlignment="Top" Width="66" FontSize="18" Foreground="White" Margin="0,76,0,0"><Run Language="hu-hu" Text="Dolgozó"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
         <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="4" VerticalAlignment="Top" Width="66" FontSize="18" Foreground="White" Margin="0,10,0,0"><Run Language="hu-hu" Text="Időpont"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-
 
     </Grid>
 </Window>
