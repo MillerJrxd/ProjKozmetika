@@ -72,23 +72,61 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Button Content="Button"  Height="64" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="267" Grid.ColumnSpan="2" />
-        <Path Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="500" Grid.RowSpan="7" Stroke="White" Stretch="Fill" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="20">
+        <Button x:Name="btnSubmit" Content="Foglal"  Height="64" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Width="267" Grid.ColumnSpan="2" Click="btnSubmit_Click"/>
+        
+        <Path Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="500" Grid.RowSpan="7" Stroke="White" 
+              Stretch="Fill" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="20">
+            
             <Path.Data>
                 <PathGeometry Figures="M400,660.04 L400,88.04"/>
             </Path.Data>
         </Path>
-        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="78" VerticalAlignment="Center" Width="541" FontSize="36" FontFamily="Lucida Handwriting" Foreground="White"><Run Language="hu-hu" Text="Csillagvirág szépségszalon"/></TextBlock>
-        <ComboBox HorizontalAlignment="Center" Height="55" Grid.Row="1" VerticalAlignment="Center" Width="249"/>
-        <ComboBox HorizontalAlignment="Center" Height="55" Grid.Row="2" VerticalAlignment="Center" Width="249" Grid.RowSpan="2"/>
-        <ComboBox HorizontalAlignment="Center" Height="55" Grid.Row="4" VerticalAlignment="Center" Width="249"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="1" TextWrapping="Wrap" Text="Keresztnév" VerticalAlignment="Center" Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="2" TextWrapping="Wrap" Text="Vezetéknév" VerticalAlignment="Center" Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"/>
-        <TextBox Grid.Column="1"  HorizontalAlignment="Center" Height="55" Grid.Row="3" TextWrapping="Wrap" Text="Telefon" VerticalAlignment="Center" Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"/>
-        <TextBox Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="4" TextWrapping="Wrap" Text="Email" VerticalAlignment="Center" Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18"/>
-        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="1" VerticalAlignment="Top" Width="96" FontSize="18" Foreground="White" Margin="0,10,0,0"><Run Language="hu-hu" Text="Szolgáltatás"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="2" VerticalAlignment="Top" Width="66" FontSize="18" Foreground="White" Margin="0,76,0,0"><Run Language="hu-hu" Text="Dolgozó"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="4" VerticalAlignment="Top" Width="66" FontSize="18" Foreground="White" Margin="0,10,0,0"><Run Language="hu-hu" Text="Időpont"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="78" VerticalAlignment="Center" 
+                   Width="541" FontSize="36" FontFamily="Lucida Handwriting" Foreground="White">
+            <Run Language="hu-hu" Text="Csillagvirág szépségszalon"/></TextBlock>
+        
+        <ComboBox x:Name="cbService" HorizontalAlignment="Center" Height="55" Grid.Row="1" 
+                  VerticalAlignment="Center" Width="249" SelectionChanged="cbService_SelectionChanged" 
+                  ItemsSource="{Binding Szolgaltatasok}"  DisplayMemberPath="SzolgKategoria"/>
+        
+        <ComboBox x:Name="cbWorker"  HorizontalAlignment="Center" Height="55" Grid.Row="2" 
+                  VerticalAlignment="Center" Width="249" Grid.RowSpan="2" 
+                  ItemsSource="{Binding Dolgozok}" DisplayMemberPath="DolgozoFullName"/>
+        
+        <ComboBox x:Name="cbDate" HorizontalAlignment="Center" Height="55" Grid.Row="4" 
+                  VerticalAlignment="Center" Width="249"/>
+        
+        <TextBox x:Name="txtUsrFirstName" Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="1" VerticalAlignment="Center" 
+                 Width="249" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
+                PreviewTextInput="txtUsrFirstName_PreviewTextInput" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
+        
+        <TextBox x:Name="txtUsrLastName" Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="2" TextWrapping="Wrap" Text="Vezetéknév" VerticalAlignment="Center" 
+                 Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
+                 PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
+        
+        <TextBox x:Name="txtUsrPhone" Grid.Column="1"  HorizontalAlignment="Center" Height="55" Grid.Row="3" TextWrapping="Wrap" Text="Telefon" VerticalAlignment="Center" 
+                 Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
+                 PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
+        
+        <TextBox x:Name="txtUsrEmail" Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="4" TextWrapping="Wrap" Text="Email" VerticalAlignment="Center" 
+                 Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
+                 PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
+        
+        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="1" VerticalAlignment="Top" Width="96" 
+                   FontSize="18" Foreground="White" Margin="0,10,0,0">
+            <Run Language="hu-hu" Text="Szolgáltatás"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        
+        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="2" VerticalAlignment="Top" Width="66" 
+                   FontSize="18" Foreground="White" Margin="0,76,0,0">
+            <Run Language="hu-hu" Text="Dolgozó"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="4" VerticalAlignment="Top" Width="66" 
+                   FontSize="18" Foreground="White" Margin="0,10,0,0">
+            <Run Language="hu-hu" Text="Időpont"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
 
     </Grid>
 </Window>
