@@ -1,5 +1,4 @@
-﻿using MySqlConnector;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +11,7 @@ namespace ProjKozmetika
     /// </summary>
     public partial class MainWindow : Window
     {
-        MySqlConnection conn;
+        //MySqlConnection conn;
         private readonly string connectionString = "server=localhost;port=3306;uid=root;database=kozmetika";
         ObservableCollection<Szolgaltatas> szolgatatasok = new ObservableCollection<Szolgaltatas>();
         ObservableCollection<Dolgozo> dolgozok = new ObservableCollection<Dolgozo>();
@@ -21,16 +20,29 @@ namespace ProjKozmetika
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += MainWindow_LoadedAsync;
+            /*Loaded += MainWindow_LoadedAsync;
             cbService.ItemsSource = szolgatatasok;
             cbWorker.ItemsSource = dolgozok;
             cbDate.ItemsSource = times;
             this.DataContext = this;
-            cbWorker.IsEnabled = false;
+            cbWorker.IsEnabled = false;*/
         }
+        
+        private void btnNewReservation_Click(object sender, RoutedEventArgs e)
+        {
+            Reservation reservation = new Reservation();
+            reservation.ShowDialog();
+        }
+
+        private void btnReservationShow_Click(object sender, RoutedEventArgs e)
+        {
+            ReservationDisplay reservationDisplay = new ReservationDisplay();
+            reservationDisplay.ShowDialog();
+        }
+        /*
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
-            await GetServicesAsync();
+            //await GetServicesAsync();
             //await GetWorkersAsync();
         }
         private async Task GetServicesAsync()
@@ -132,8 +144,8 @@ namespace ProjKozmetika
         private void PreviewAppCommandsExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Command == ApplicationCommands.Copy ||
-                e.Command == ApplicationCommands.Cut ||
-                e.Command == ApplicationCommands.Paste)
+            e.Command == ApplicationCommands.Cut ||
+            e.Command == ApplicationCommands.Paste)
             {
                 e.Handled = true;
             }
@@ -195,15 +207,15 @@ namespace ProjKozmetika
 
                 // Tiltjuk az emojik és más nem kívánt karakterek tartományát
                 if ((unicodeValue >= 0x1F600 && unicodeValue <= 0x1F64F) ||   // Arcok
-                    (unicodeValue >= 0x1F300 && unicodeValue <= 0x1F5FF) ||   // Piktogramok
-                    (unicodeValue >= 0x1F680 && unicodeValue <= 0x1F6FF) ||   // Szállítás és térképek
-                    (unicodeValue >= 0x2600 && unicodeValue <= 0x26FF) ||    // Szimbólumok
-                    (unicodeValue >= 0x2700 && unicodeValue <= 0x27BF))       // Dingbatok
+                  (unicodeValue >= 0x1F300 && unicodeValue <= 0x1F5FF) ||   // Piktogramok
+                  (unicodeValue >= 0x1F680 && unicodeValue <= 0x1F6FF) ||   // Szállítás és térképek
+                  (unicodeValue >= 0x2600 && unicodeValue <= 0x26FF) ||    // Szimbólumok
+                  (unicodeValue >= 0x2700 && unicodeValue <= 0x27BF))       // Dingbatok
                 {
                     e.Handled = true; // Megakadályozzuk a bevitel
                     return;
                 }
             }
-        }
+        }*/
     }
 }

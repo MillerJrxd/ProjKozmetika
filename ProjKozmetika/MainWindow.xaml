@@ -1,132 +1,65 @@
-﻿<Window x:Class="ProjKozmetika.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="ProjKozmetika.MainWindow"
         Title="Csillagvirág Szépségszalon" Height="800" Width="800" MaxHeight="800" MaxWidth="800" MinHeight="800" MinWidth="800"
         Background="White" WindowStartupLocation="CenterScreen">
-
-    <Window.Resources>
-        <!-- Button Style -->
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="LightGray"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" 
-                                Background="{TemplateBinding Background}" 
-                                CornerRadius="35" 
-                                BorderBrush="DarkGray"
-                                BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <!-- Hover state -->
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="LightBlue"/>
-                                <Setter TargetName="border" Property="BorderBrush" Value="Blue"/>
-                            </Trigger>
-                            <!-- Pressed state -->
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="DarkBlue"/>
-                            </Trigger>
-                            <!-- Disabled state -->
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="border" Property="Background" Value="Gray"/>
-                                <Setter Property="Foreground" Value="LightGray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
-    <Grid Width="800" HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Center" Height="800" Margin="0,-16,0,0" VerticalAlignment="Top" Width="800">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <LinearGradientBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                        <RotateTransform Angle="-5" CenterX="0.5" CenterY="0.5"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </LinearGradientBrush.RelativeTransform>
-                <GradientStop Color="#FFE04C9D" Offset="1"/>
-                <GradientStop Color="#FFF5677E" Offset="0"/>
+                <GradientStop Color="#96485E94" Offset="1"/>
+                <GradientStop Color="#FFEB97F9" Offset="0"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnSubmit" Content="Foglal"  Height="64" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                Width="267" Grid.ColumnSpan="2" Click="btnSubmit_Click"/>
-        
-        <Path Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="500" Grid.RowSpan="7" Stroke="White" 
-              Stretch="Fill" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="20">
-            
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="46" Margin="164,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="436" TextAlignment="Center"><Run Language="hu-hu" Text="Csillagvirág Szépségszalon" FontSize="30" FontFamily="Century Gothic"/></TextBlock>
+        <TextBlock
+
+    Grid.ColumnSpan="2" Margin="332,20,0,0" Width="135" TextAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Grid.Row="1" Height="40" HorizontalAlignment="Left" FontSize="26" FontFamily="Century Gothic"><Run
+
+    Language="hu-hu" Text="Ügyfél"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="40" Margin="332,20,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" FontSize="26" TextAlignment="Center" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Dolgozó"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="40" Margin="332,20,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" FontSize="26" TextAlignment="Center" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Foglalás"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="40" Margin="328,20,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FontSize="26" TextAlignment="Center"><Run Language="hu-hu" Text="Szolgáltatás"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <Button x:Name="btnNewReservation" Content="Új foglalás" HorizontalAlignment="Left" Height="45" Margin="280,87,0,0" Grid.Row="1" VerticalAlignment="Top" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#9BBB39FB" Click="btnNewReservation_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnNewWorker" Content="Új dolgozó" HorizontalAlignment="Left" Height="45" Margin="78,87,0,0" Grid.Row="2" VerticalAlignment="Top" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#9BBB39FB"/>
+        <Button x:Name="btnWorkerEdit" Content="Dolgozó módosítása" HorizontalAlignment="Left" Height="45" Margin="84,87,0,0" Grid.Row="2" VerticalAlignment="Top" Width="270" FontSize="26" FontFamily="Century Gothic" Background="#9BBB39FB" Grid.Column="1"/>
+        <Button x:Name="btnReservationShow" Content="Foglalások megjelenítése" HorizontalAlignment="Left" Height="45" Margin="234,87,0,0" Grid.Row="3" VerticalAlignment="Top" Width="330" FontSize="26" FontFamily="Century Gothic" Background="#9BBB39FB" Grid.ColumnSpan="2" Click="btnReservationShow_Click"/>
+        <Button x:Name="btnNewService" Content="Új szolgáltatás" HorizontalAlignment="Left" Height="45" Margin="78,87,0,0" Grid.Row="4" VerticalAlignment="Top" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#9BBB39FB"/>
+        <Button x:Name="btnServiceEdit" Content="Szolgáltatás módosítása" HorizontalAlignment="Left" Height="45" Margin="59,87,0,0" Grid.Row="4" VerticalAlignment="Top" Width="320" FontSize="26" FontFamily="Century Gothic" Background="#9BBB39FB" Grid.Column="1"/>
+        <Path Grid.ColumnSpan="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Grid.Row="1" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="800.6">
             <Path.Data>
-                <PathGeometry Figures="M400,660.04 L400,88.04"/>
+                <PathGeometry Figures="M0,104.34783 L801,104.34783"/>
             </Path.Data>
         </Path>
-        <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="78" VerticalAlignment="Center" 
-                   Width="541" FontSize="36" FontFamily="Lucida Handwriting" Foreground="White">
-            <Run Language="hu-hu" Text="Csillagvirág szépségszalon"/></TextBlock>
-        
-        <ComboBox x:Name="cbService" HorizontalAlignment="Center" Height="55" Grid.Row="1" 
-                  VerticalAlignment="Center" Width="249" SelectionChanged="cbService_SelectionChanged" 
-                  ItemsSource="{Binding Szolgaltatasok}"  DisplayMemberPath="SzolgKategoria"/>
-        
-        <ComboBox x:Name="cbWorker"  HorizontalAlignment="Center" Height="55" Grid.Row="2" 
-                  VerticalAlignment="Center" Width="249" Grid.RowSpan="2" 
-                  ItemsSource="{Binding Dolgozok}" DisplayMemberPath="DolgozoFullName"/>
-        
-        <ComboBox x:Name="cbDate" HorizontalAlignment="Center" Height="55" Grid.Row="4" 
-                  VerticalAlignment="Center" Width="249"/>
-        
-        <TextBox x:Name="txtUsrFirstName" Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="1" VerticalAlignment="Center" 
-                 Width="249" 
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
-                PreviewTextInput="txtUsrFirstName_PreviewTextInput" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
-        
-        <TextBox x:Name="txtUsrLastName" Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="2" TextWrapping="Wrap" Text="Vezetéknév" VerticalAlignment="Center" 
-                 Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" 
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
-                 PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
-        
-        <TextBox x:Name="txtUsrPhone" Grid.Column="1"  HorizontalAlignment="Center" Height="55" Grid.Row="3" TextWrapping="Wrap" Text="Telefon" VerticalAlignment="Center" 
-                 Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" 
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
-                 PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
-        
-        <TextBox x:Name="txtUsrEmail" Grid.Column="1" HorizontalAlignment="Center" Height="55" Grid.Row="4" TextWrapping="Wrap" Text="Email" VerticalAlignment="Center" 
-                 Width="249" Background="#33FFFFFF" BorderBrush="White" Foreground="White" 
-                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" 
-                 PreviewTextInput="PreviewTextRegex" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
-        
-        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="1" VerticalAlignment="Top" Width="96" 
-                   FontSize="18" Foreground="White" Margin="0,10,0,0">
-            <Run Language="hu-hu" Text="Szolgáltatás"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        
-        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="2" VerticalAlignment="Top" Width="66" 
-                   FontSize="18" Foreground="White" Margin="0,76,0,0">
-            <Run Language="hu-hu" Text="Dolgozó"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="26" Grid.Row="4" VerticalAlignment="Top" Width="66" 
-                   FontSize="18" Foreground="White" Margin="0,10,0,0">
-            <Run Language="hu-hu" Text="Időpont"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <Path Grid.ColumnSpan="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Grid.Row="2" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="801">
+            <Path.Data>
+                <PathGeometry Figures="M0,278.26087 L800,278.26087"/>
+            </Path.Data>
+        </Path>
+        <Path Grid.ColumnSpan="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Grid.Row="3" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="801">
+            <Path.Data>
+                <PathGeometry Figures="M0,452.17391 L802,452.17391"/>
+            </Path.Data>
+        </Path>
+        <Path Grid.ColumnSpan="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Grid.Row="4" Stroke="Black" Stretch="Fill" VerticalAlignment="Top" Width="801">
+            <Path.Data>
+                <PathGeometry Figures="M0,626.08696 L803,626.08696"/>
+            </Path.Data>
+        </Path>
 
     </Grid>
+
+
 </Window>
