@@ -7,10 +7,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-   
+
   <ItemGroup>
     <Resource Include="Images\nagykepKozmetika.jpg" />
-    <PackageReference Include="MySqlConnector" Version="2.3.7" />
   </ItemGroup>
 
 </Project>

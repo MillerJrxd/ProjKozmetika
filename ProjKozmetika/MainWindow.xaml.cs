@@ -1,8 +1,4 @@
-﻿using MySqlConnector;
-using System.Collections.ObjectModel;
-using System.Resources;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
+﻿using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +11,7 @@ namespace ProjKozmetika
     /// </summary>
     public partial class MainWindow : Window
     {
-        MySqlConnection conn;
+        //MySqlConnection conn;
         private readonly string connectionString = "server=localhost;port=3306;uid=root;database=kozmetika";
         ObservableCollection<Szolgaltatas> szolgatatasok = new ObservableCollection<Szolgaltatas>();
         ObservableCollection<Dolgozo> dolgozok = new ObservableCollection<Dolgozo>();
@@ -24,15 +20,29 @@ namespace ProjKozmetika
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += MainWindow_LoadedAsync;
-            ServiceComboBox.ItemsSource = szolgatatasok;
-            EmployeeComboBox.ItemsSource = dolgozok;
+            /*Loaded += MainWindow_LoadedAsync;
+            cbService.ItemsSource = szolgatatasok;
+            cbWorker.ItemsSource = dolgozok;
+            cbDate.ItemsSource = times;
             this.DataContext = this;
-            EmployeeComboBox.IsEnabled = false;
+            cbWorker.IsEnabled = false;*/
         }
+        
+        private void btnNewReservation_Click(object sender, RoutedEventArgs e)
+        {
+            Reservation reservation = new Reservation();
+            reservation.ShowDialog();
+        }
+
+        private void btnReservationShow_Click(object sender, RoutedEventArgs e)
+        {
+            ReservationDisplay reservationDisplay = new ReservationDisplay();
+            reservationDisplay.ShowDialog();
+        }
+        /*
         private async void MainWindow_LoadedAsync(object sender, RoutedEventArgs e)
         {
-            await GetServicesAsync();
+            //await GetServicesAsync();
             //await GetWorkersAsync();
         }
         private async Task GetServicesAsync()
@@ -92,8 +102,8 @@ namespace ProjKozmetika
         /// </summary>
         private void IsCorrectWorker()
         {
-            Dolgozo chosenWorker = (Dolgozo)EmployeeComboBox.SelectedItem;
-            Szolgaltatas chosenService = (Szolgaltatas)ServiceComboBox.SelectedItem;
+            Dolgozo chosenWorker = (Dolgozo)cbWorker.SelectedItem;
+            Szolgaltatas chosenService = (Szolgaltatas)cbService.SelectedItem;
 
             if (chosenWorker == null || chosenService == null)
             {
@@ -112,18 +122,19 @@ namespace ProjKozmetika
             if (worker.Szolgaltatas != service.SzolgID)
             {
                 MessageBox.Show("Figyelem! Az általad válaszott dolgozó nem biztosítja a válaszott szolgáltatás!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
-                EmployeeComboBox.SelectedItem = null;
-                ServiceComboBox.SelectedItem = null;
+                cbWorker.SelectedItem = null;
+                cbService.SelectedItem = null;
             }
         }
-        private async void ServiceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cbService_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EmployeeComboBox.IsEnabled = true;
-            Szolgaltatas selectedItem = (Szolgaltatas)ServiceComboBox.SelectedItem;
+            cbWorker.IsEnabled = true;
+            Szolgaltatas selectedItem = (Szolgaltatas)cbService.SelectedItem;
             dolgozok.Clear();
             await GetWorkersAsync(selectedItem.SzolgID);
+            times.Clear();
             await TimeFillAsync(selectedItem.SzolgaltatasIdeje);
-            EmployeeComboBox.SelectedIndex = 0;
+            cbWorker.SelectedIndex = 0;
         }
         private void PreviewTextRegex(object sender, TextCompositionEventArgs e)
         {
@@ -133,37 +144,37 @@ namespace ProjKozmetika
         private void PreviewAppCommandsExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Command == ApplicationCommands.Copy ||
-                e.Command == ApplicationCommands.Cut ||
-                e.Command == ApplicationCommands.Paste)
+            e.Command == ApplicationCommands.Cut ||
+            e.Command == ApplicationCommands.Paste)
             {
                 e.Handled = true;
             }
         }
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(FirstNameTextBox.Text) == true)
+            if (string.IsNullOrEmpty(txtUsrFirstName.Text) == true)
             {
                 MessageBox.Show("Hibás vagy hiányzó vezetéknév!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
-                FirstNameTextBox.Clear();
-                FirstNameTextBox.Focus();
+                txtUsrFirstName.Clear();
+                txtUsrFirstName.Focus();
             }
-            else if (string.IsNullOrEmpty(LastNameTextBox.Text) == true)
+            else if (string.IsNullOrEmpty(txtUsrLastName.Text) == true)
             {
                 MessageBox.Show("Hibás vagy hiányzó keresztnév!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
-                LastNameTextBox.Clear();
-                LastNameTextBox.Focus();
+                txtUsrLastName.Clear();
+                txtUsrLastName.Focus();
             }
-            else if (string.IsNullOrEmpty(EmailTextBox.Text) == true && !EmailTextBox.Text.Contains('@'))
+            else if (string.IsNullOrEmpty(txtUsrEmail.Text) == true && !txtUsrEmail.Text.Contains('@'))
             {
                 MessageBox.Show("Hibás vagy hiányzó email cím!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
-                EmailTextBox.Clear();
-                EmailTextBox.Focus();
+                txtUsrEmail.Clear();
+                txtUsrEmail.Focus();
             }
-            else if (string.IsNullOrEmpty(PhoneTextBox.Text) == true && PhoneTextBox.Text.Count() != 11)
+            else if (string.IsNullOrEmpty(txtUsrPhone.Text) == true && txtUsrPhone.Text.Count() != 11)
             {
                 MessageBox.Show("Hibás vagy hiányzó telefonszám!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
-                PhoneTextBox.Clear();
-                PhoneTextBox.Focus();
+                txtUsrPhone.Clear();
+                txtUsrPhone.Focus();
             }
             else
             {
@@ -173,7 +184,38 @@ namespace ProjKozmetika
         }
         private async Task TimeFillAsync(TimeSpan serviceTime)
         {
-            throw new NotImplementedException();
+            TimeSpan openingTime = new TimeSpan(8, 0, 0);  // 08:00
+            TimeSpan closingTime = new TimeSpan(17, 0, 0); // 17:00
+
+
+            // Iterálás a nyitási időponttól a zárási időpontig a szolgáltatás időtartamával
+            for (TimeSpan currentTime = openingTime; currentTime.Add(serviceTime) <= closingTime; currentTime = currentTime.Add(serviceTime))
+            {
+                times.Add(currentTime);
+            }
         }
+
+        private void txtUsrFirstName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            //Regex regex = new Regex(@"[^\p{L}[\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]]]+$");
+            //e.Handled = regex.IsMatch(e.Text);
+
+            foreach (char c in e.Text)
+            {
+                // Ellenőrizzük a karakter Unicode értékét
+                int unicodeValue = char.ConvertToUtf32(e.Text, 0);
+
+                // Tiltjuk az emojik és más nem kívánt karakterek tartományát
+                if ((unicodeValue >= 0x1F600 && unicodeValue <= 0x1F64F) ||   // Arcok
+                  (unicodeValue >= 0x1F300 && unicodeValue <= 0x1F5FF) ||   // Piktogramok
+                  (unicodeValue >= 0x1F680 && unicodeValue <= 0x1F6FF) ||   // Szállítás és térképek
+                  (unicodeValue >= 0x2600 && unicodeValue <= 0x26FF) ||    // Szimbólumok
+                  (unicodeValue >= 0x2700 && unicodeValue <= 0x27BF))       // Dingbatok
+                {
+                    e.Handled = true; // Megakadályozzuk a bevitel
+                    return;
+                }
+            }
+        }*/
     }
 }
