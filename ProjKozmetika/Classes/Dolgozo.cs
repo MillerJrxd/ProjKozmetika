@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjKozmetika
+namespace ProjKozmetika.Classes
 {
     public class Dolgozo
     {
@@ -15,7 +15,7 @@ namespace ProjKozmetika
 
         public Dolgozo(byte id, string dolgFirstName, string dolgLastName, string dolgTel, string dolgEmail, bool status, byte szolgaltatas)
         {
-            
+
             Id = id;
             DolgFirstName = dolgFirstName;
             DolgLastName = dolgLastName;

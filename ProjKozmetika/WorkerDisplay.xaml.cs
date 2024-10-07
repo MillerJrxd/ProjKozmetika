@@ -19,11 +19,11 @@ namespace ProjKozmetika
     /// <summary>
     /// Interaction logic for ReservationDisplay.xaml
     /// </summary>
-    public partial class ReservationDisplay : Window
+    public partial class WorkerDisplay : Window
     {
-        ObservableCollection<Foglalas> reservation = new();
+        ObservableCollection<Dolgozo> reservation = new();
 
-        public ReservationDisplay()
+        public WorkerDisplay()
         {
             InitializeComponent();
         }

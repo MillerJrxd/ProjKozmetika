@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjKozmetika
+namespace ProjKozmetika.Classes
 {
     public class Ugyfel
     {
@@ -23,6 +23,6 @@ namespace ProjKozmetika
         public string UgyfelTel { get => ugyfelTel; set => ugyfelTel = value; }
         public string UgyfelEmail { get => ugyfelEmail; set => ugyfelEmail = value; }
         public int Pontok { get => pontok; set => pontok = value; }
-        
+
     }
 }

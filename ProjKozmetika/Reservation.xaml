@@ -25,14 +25,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Vezetéknév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9"/>
+        <TextBox x:Name="txtUsrFirstName" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic" Grid.Row="1"><Run Language="hu-hu" Text="Keresztnév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="1"/>
+        <TextBox x:Name="txtUsrLastName" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="1"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic" Grid.Row="2"><Run Language="hu-hu" Text="Email"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="2"/>
+        <TextBox x:Name="txtUsrEmail" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="2"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="21,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic" Grid.Row="3"><Run Language="hu-hu" Text="Telefonszám"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="3"/>
-        <ComboBox x:Name="cbDate" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="126,54,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="1" IsReadOnly="True">
+        <TextBox x:Name="txtUsrPhone" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="3"/>
+        <ComboBox x:Name="cbWorker" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="126,54,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="1" IsReadOnly="True">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -60,7 +60,7 @@
                 Language="hu-hu" Text="Időpont választás"/><LineBreak
         /><Run
                 Language="hu-hu"/></TextBlock>
-        <ComboBox x:Name="cbService_Copy" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="126,54,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="2" IsReadOnly="True">
+        <ComboBox x:Name="cbDate" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="126,54,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="2" IsReadOnly="True">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -68,6 +68,6 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <Button x:Name="btnSubmit" Grid.Column="1" Content="Foglalás" HorizontalAlignment="Left" Height="43" Margin="147,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="157" Background="#4CFFFFFF" FontFamily="Century Gothic" FontSize="17"/>
+        <Button x:Name="btnUsrSubmit" Grid.Column="1" Content="Foglalás" HorizontalAlignment="Left" Height="43" Margin="147,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="157" Background="#4CFFFFFF" FontFamily="Century Gothic" FontSize="17" Click="btnUsrSubmit_Click"/>
     </Grid>
 </Window>

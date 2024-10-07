@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjKozmetika
+namespace ProjKozmetika.Classes
 {
     public class Szolgaltatas
     {
