@@ -15,12 +15,6 @@ namespace ProjKozmetika
         public MainWindow()
         {
             InitializeComponent();
-            /*Loaded += MainWindow_LoadedAsync;
-            cbService.ItemsSource = szolgatatasok;
-            cbWorker.ItemsSource = dolgozok;
-            cbDate.ItemsSource = times;
-            this.DataContext = this;
-            cbWorker.IsEnabled = false;*/
         }
 
         private void btnNewReservation_Click(object sender, RoutedEventArgs e)
@@ -28,18 +22,15 @@ namespace ProjKozmetika
             Reservation reservation = new Reservation();
             reservation.ShowDialog();
         }
-
         private void btnReservationShow_Click(object sender, RoutedEventArgs e)
         {
             ReservationDisplay reservationDisplay = new ReservationDisplay();
             reservationDisplay.ShowDialog();
         }
-
         private void btnNewWorker_Click(object sender, RoutedEventArgs e)
         {
             Worker worker = new Worker();
             worker.ShowDialog();
         }
-
     }
 }
