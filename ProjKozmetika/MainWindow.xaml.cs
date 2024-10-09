@@ -7,16 +7,17 @@ using ProjKozmetika.Classes;
 
 namespace ProjKozmetika
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
-
+        public static string ConnectionString()
+        {
+            return "server=localhost;port=3306;uid=root;database=kozmetika";
+        }
         private void btnNewReservation_Click(object sender, RoutedEventArgs e)
         {
             Reservation reservation = new Reservation();

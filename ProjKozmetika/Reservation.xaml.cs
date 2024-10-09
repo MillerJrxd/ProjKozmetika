@@ -25,7 +25,6 @@ namespace ProjKozmetika
     public partial class Reservation : Window
     {
         MySqlConnection conn;
-        private readonly string connectionString = "server=localhost;port=3306;uid=root;database=kozmetika";
         ObservableCollection<Szolgaltatas> szolgatatasok = new ObservableCollection<Szolgaltatas>();
         ObservableCollection<Dolgozo> dolgozok = new ObservableCollection<Dolgozo>();
         ObservableCollection<TimeSpan> times = new ObservableCollection<TimeSpan>();
@@ -49,7 +48,7 @@ namespace ProjKozmetika
         {
             try
             {
-                conn = new MySqlConnection(connectionString);
+                conn = new MySqlConnection(MainWindow.ConnectionString());
                 await conn.OpenAsync();
             }
             catch (MySqlException ex)
@@ -73,7 +72,7 @@ namespace ProjKozmetika
         {
             try
             {
-                conn = new MySqlConnection(connectionString);
+                conn = new MySqlConnection(MainWindow.ConnectionString());
                 await conn.OpenAsync();
             }
             catch (MySqlException ex)
@@ -94,6 +93,7 @@ namespace ProjKozmetika
                 }
                 else dolgozok.Add(new Dolgozo(reader.GetByte(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetBoolean(5), reader.GetByte(6)));
             }
+            await conn.CloseAsync();
             return Task.CompletedTask;
         }
         private async void cbService_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -152,7 +152,7 @@ namespace ProjKozmetika
                 var selectedService = cbService.SelectedItem as Szolgaltatas;
 
 
-                using (var conn = new MySqlConnection(connectionString))
+                using (var conn = new MySqlConnection(MainWindow.ConnectionString()))
                 {
                     await conn.OpenAsync();
 
@@ -266,7 +266,7 @@ namespace ProjKozmetika
             TimeSpan openingTime = new TimeSpan(8, 0, 0); // 8:00
             TimeSpan closingTime = new TimeSpan(17, 0, 0); // 17:00
 
-            using (var conn = new MySqlConnection(connectionString))
+            using (var conn = new MySqlConnection(MainWindow.ConnectionString()))
             {
                 await conn.OpenAsync();
 

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MySqlConnector;
 using ProjKozmetika.Classes;
 
 namespace ProjKozmetika
@@ -21,23 +22,27 @@ namespace ProjKozmetika
     /// </summary>
     public partial class ReservationDisplay : Window
     {
+        MySqlConnection conn;
         ObservableCollection<Foglalas> reservation = new();
+        
 
         public ReservationDisplay()
         {
             InitializeComponent();
         }
-
-        /*private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private async Task<Task> DisplayDataAsync()
         {
-            if (dataGridView1.SelectedRows.Count > 2)
-            {
-                for (int i = 2; i < dataGridView1.SelectedRows.Count; i++)
-                {
-                    dataGridView1.SelectedRows[i].Selected = false;
 
-                }
+            throw   new NotImplementedException();
+            try
+            {
+                conn = new MySqlConnection(MainWindow.ConnectionString());
+                await conn.OpenAsync();
             }
-        }*/
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
