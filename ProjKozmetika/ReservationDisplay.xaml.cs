@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MySqlConnector;
 using ProjKozmetika.Classes;
 
@@ -31,7 +19,14 @@ namespace ProjKozmetika
             InitializeComponent();
             dgReservations.ItemsSource = reservation;
             this.DataContext = this;
+            Loaded +=ReservationDisplayAsync_Loaded;
+
         }
+        private async void ReservationDisplayAsync_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadReservationsAsync();
+        }
+
         private async Task<Task> LoadReservationsAsync()
         {
             using (var conn = new MySqlConnection(MainWindow.ConnectionString()))
@@ -61,13 +56,68 @@ namespace ProjKozmetika
                                 UgyfelNev = reader.GetString(1),
                                 SzolgaltatasNev = reader.GetString(2),
                                 DolgozoNev = reader.GetString(3),
-                                FoglalasStart = reader.GetTimeSpan(4)
+                                FoglalasStart = reader.GetDateTime(4)
                             });
                         }
                     }
                 }
             }
             return Task.CompletedTask;
+        }
+
+        private async void btnDeleteReservation_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            var selectedReservation = (DisplayReservation)dgReservations.SelectedItem;
+
+            if (dgReservations.SelectedItem != null)
+            {
+                if (dgReservations.SelectedItems.Count == 1)
+                {
+                    using (var conn = new MySqlConnection(MainWindow.ConnectionString()))
+                    {
+                        await conn.OpenAsync();
+
+                        string query = @"DELETE FROM foglalás WHERE foglalasID = @foglalasID";
+                        //addReservationCommand.Parameters.AddWithValue("@szolgaltatasID", selectedService.SzolgID);
+
+                        using (var command = new MySqlCommand(query, conn))
+                        {
+                            command.Parameters.AddWithValue("@foglalasID", selectedReservation.FoglalasID);
+
+                            await command.ExecuteNonQueryAsync();
+                        }
+                    }
+                    RemoveFromCollection(selectedReservation.FoglalasID);
+                    await LoadReservationsAsync();
+                }
+                else MessageBox.Show("Nem jelölhet ki egynél több foglalást!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else MessageBox.Show("A törléshez jelöljön ki egy foglalást!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        private void RemoveFromCollection(int key)
+        {
+            int left = 0;
+            int right = reservation.Count - 1;
+
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+                var currentReservation = reservation[mid];
+
+                if (currentReservation.FoglalasID == key)
+                {
+                    reservation.RemoveAt(mid);
+                    return;
+                }
+                else if (currentReservation.FoglalasID < key)
+                {
+                    left = mid + 1;
+                }
+                else
+                {
+                    right = mid - 1;
+                }
+            }
         }
     }
 }

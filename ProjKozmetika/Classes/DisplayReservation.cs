@@ -12,7 +12,7 @@ namespace ProjKozmetika.Classes
         public string UgyfelNev { get; set; }
         public string SzolgaltatasNev { get; set; }
         public string DolgozoNev { get; set; }
-        public TimeSpan FoglalasStart { get; set; }
+        public DateTime FoglalasStart { get; set; }
 
     }
 }
