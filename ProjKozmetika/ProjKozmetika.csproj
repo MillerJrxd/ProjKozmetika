@@ -9,11 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Resource Include="Images\hatter.png" />
     <PackageReference Include="MySqlConnector" Version="2.3.7" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\nagykepKozmetika.jpg" />
+    <Resource Include="Images\tulipant.png" />
+    <Resource Include="Images\virag.png" />
+    <Resource Include="Images\viragtukrozve.png" />
   </ItemGroup>
 
 </Project>
