@@ -23,6 +23,20 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="dgWorkers" Margin="10,10,10,10" Grid.RowSpan="2" d:ItemsSource="{d:SampleData ItemCount=5}" RowBackground="#00000000" Background="#4CFFFFFF" HeadersVisibility="Column" FontFamily="Century Gothic">
         </DataGrid>
-        <Button x:Name="btnEditWorker" Grid.Column="1" Content="Dolgozó módosítása" HorizontalAlignment="Center" Height="39" Margin="0,198,0,0" VerticalAlignment="Top" Width="155" FontSize="16" Background="#4CFFFFFF" Grid.RowSpan="2"/>
+        <Button x:Name="btnEditWorker" Content="Módosítás" HorizontalAlignment="Center" Height="50" Margin="0,192,0,0" Grid.Column="1" VerticalAlignment="Top" Width="164" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Grid.RowSpan="2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE669B2"/>
+                    <GradientStop Color="#FF3DACC4" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>
