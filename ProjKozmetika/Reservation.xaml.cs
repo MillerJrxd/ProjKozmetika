@@ -44,7 +44,7 @@ namespace ProjKozmetika
         {
             await GetServicesAsync();
         }
-        private async Task<Task> GetServicesAsync()
+        /*private async Task<Task> GetServicesAsync()
         {
             try
             {
@@ -67,7 +67,42 @@ namespace ProjKozmetika
             }
             await conn.CloseAsync();
             return Task.CompletedTask;
+        }*/
+        private async Task<Task> GetServicesAsync()
+        {
+            try
+            {
+                conn = new MySqlConnection(MainWindow.ConnectionString());
+                await conn.OpenAsync();
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            // Lekérdezzük az összes szolgáltatást és azokhoz tartozó dolgozókat
+            string query = @"SELECT DISTINCT Szolgáltatás.szolgaltatasID, Szolgáltatás.szolgaltatasKategoria, 
+                            Szolgáltatás.szolgaltatasIdotartam, Szolgáltatás.szolgaltatasAr
+                     FROM Szolgáltatás
+                     JOIN Dolgozók ON Dolgozók.szolgáltatasa = Szolgáltatás.szolgaltatasID
+                     WHERE Dolgozók.statusz = 1"; // Csak aktív dolgozók
+
+            var command = new MySqlCommand(query, conn);
+            var reader = await command.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                szolgatatasok.Add(new Szolgaltatas(
+                    reader.GetByte(0),   // szolgaltatasID
+                    reader.GetString(1),  // szolgaltatasKategoria
+                    reader.GetTimeSpan(2),// szolgaltatasIdotartam
+                    reader.GetInt32(3))); // szolgaltatasAr
+            }
+
+            await conn.CloseAsync();
+            return Task.CompletedTask;
         }
+
         private async Task<Task> GetWorkersAsync(byte ID)
         {
             try
@@ -138,7 +173,7 @@ namespace ProjKozmetika
             }
             else if (string.IsNullOrEmpty(txtUsrPhone.Text) == true || txtUsrPhone.Text.Count() != 11)
             {
-                MessageBox.Show("Hibás vagy hiányzó telefonszám!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Hibás vagy hiányzó telefonszám!\nAjánlott formátum: 06301234567", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtUsrPhone.Clear();
                 txtUsrPhone.Focus();
             }
@@ -221,6 +256,7 @@ namespace ProjKozmetika
                         await addReservationCommand.ExecuteNonQueryAsync();
                     }
                 }
+                MessageBox.Show("Sikeres foglalás!", "Siker", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
         }
@@ -309,7 +345,6 @@ namespace ProjKozmetika
                                     break;
                                 }
                             }
-
                             if (isAvailable)
                             {
                                 times.Add(time);

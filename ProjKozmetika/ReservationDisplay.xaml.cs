@@ -23,26 +23,51 @@ namespace ProjKozmetika
     public partial class ReservationDisplay : Window
     {
         MySqlConnection conn;
-        ObservableCollection<Foglalas> reservation = new();
-        
+        ObservableCollection<DisplayReservation> reservation = new ObservableCollection<DisplayReservation>();
+
 
         public ReservationDisplay()
         {
             InitializeComponent();
+            dgReservations.ItemsSource = reservation;
+            this.DataContext = this;
         }
-        private async Task<Task> DisplayDataAsync()
+        private async Task<Task> LoadReservationsAsync()
         {
-
-            throw   new NotImplementedException();
-            try
+            using (var conn = new MySqlConnection(MainWindow.ConnectionString()))
             {
-                conn = new MySqlConnection(MainWindow.ConnectionString());
                 await conn.OpenAsync();
+
+                string query = @"SELECT 
+                            Foglalás.foglalasID,
+                            CONCAT(Ügyfél.ugyfelFirstName, ' ', Ügyfél.ugyfelLastName) AS UgyfelNev,
+                            Szolgáltatás.szolgaltatasKategoria,
+                            CONCAT(Dolgozók.dolgozoFirstName, ' ', Dolgozók.dolgozoLastName) AS DolgozoNev,
+                            Foglalás.foglalasStart
+                         FROM Foglalás
+                         JOIN Ügyfél ON Foglalás.ugyfelID = Ügyfél.ugyfelID
+                         JOIN Szolgáltatás ON Foglalás.szolgaltatasID = Szolgáltatás.szolgaltatasID
+                         JOIN Dolgozók ON Foglalás.dolgozoID = Dolgozók.dolgozoID";
+
+                using (var command = new MySqlCommand(query, conn))
+                {
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            reservation.Add(new DisplayReservation
+                            {
+                                FoglalasID = reader.GetInt32(0),
+                                UgyfelNev = reader.GetString(1),
+                                SzolgaltatasNev = reader.GetString(2),
+                                DolgozoNev = reader.GetString(3),
+                                FoglalasStart = reader.GetTimeSpan(4)
+                            });
+                        }
+                    }
+                }
             }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            return Task.CompletedTask;
         }
     }
 }
