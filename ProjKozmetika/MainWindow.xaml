@@ -158,7 +158,7 @@
                 <PathGeometry Figures="M0,626.08696 L803,626.08696"/>
             </Path.Data>
         </Path>
-        <Image HorizontalAlignment="Left" Height="194" VerticalAlignment="Top" Width="203" Source="/Images/viragtukrozve.png" Grid.Row="2" Margin="-15,150,0,0" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
+        <Image HorizontalAlignment="Left" Height="194" VerticalAlignment="Top" Width="203" Source="/Images/viragtukrozve.png" Grid.Row="2" Margin="-1,150,0,0" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -168,7 +168,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image HorizontalAlignment="Left" Height="219" Margin="261,93,0,0" VerticalAlignment="Top" Width="210" Source="/Images/virag.png" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
+        <Image HorizontalAlignment="Left" Height="219" Margin="229,90,0,0" VerticalAlignment="Top" Width="210" Source="/Images/virag.png" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

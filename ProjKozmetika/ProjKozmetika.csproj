@@ -9,9 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\hajnyiras.png" />
+    <None Remove="Images\selfcare.png" />
+    <None Remove="Images\szelfker.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\hajnyiras.png" />
     <Resource Include="Images\hatter.png" />
     <PackageReference Include="MySqlConnector" Version="2.3.7" />
     <Resource Include="Images\nagykepKozmetika.jpg" />
+    <Resource Include="Images\selfcare.png" />
+    <Resource Include="Images\szelfker.png" />
     <Resource Include="Images\tulipant.png" />
     <Resource Include="Images\virag.png" />
     <Resource Include="Images\viragtukrozve.png" />
