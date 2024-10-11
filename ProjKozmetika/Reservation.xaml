@@ -98,7 +98,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <ComboBox x:Name="cbWorker" Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,48,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="1" IsReadOnly="True">
+        <ComboBox x:Name="cbWorker" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="131,42,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="1" IsReadOnly="True">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -106,11 +106,11 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <TextBlock Width="161" VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,18,0,0" Height="23" HorizontalAlignment="Center" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Grid.Row="1" Foreground="White"><Run
+        <TextBlock Width="162" VerticalAlignment="Top" TextWrapping="Wrap" Margin="139,16,0,0" Height="23" HorizontalAlignment="Left" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Foreground="White" Grid.Row="1"><Run
                 Language="hu-hu" Text="Dolgozó választás"/><LineBreak
         /><Run
                 Language="hu-hu"/></TextBlock>
-        <ComboBox x:Name="cbService" Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,48,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" IsReadOnly="True" BorderBrush="White">
+        <ComboBox x:Name="cbService" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="126,53,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" IsReadOnly="True" BorderBrush="White">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -118,15 +118,15 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,18,0,0" Height="23" HorizontalAlignment="Center" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Foreground="White"><Run
+        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="122,27,0,0" Height="23" HorizontalAlignment="Left" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Foreground="White"><Run
                 Language="hu-hu" Text="Szolgáltatás választás"/><LineBreak
         /><Run
                 Language="hu-hu"/></TextBlock>
-        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,18,0,0" Height="23" HorizontalAlignment="Center" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Grid.Row="2" Foreground="White"><Run
+        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="144,10,0,0" Height="23" HorizontalAlignment="Left" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Grid.Row="2" Foreground="White"><Run
                 Language="hu-hu" Text="Időpont választás"/><LineBreak
         /><Run
                 Language="hu-hu"/></TextBlock>
-        <ComboBox x:Name="cbDate" Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,48,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="2" IsReadOnly="True">
+        <ComboBox x:Name="cbDate" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="131,67,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="2" IsReadOnly="True">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -135,6 +135,7 @@
             </ComboBox.Background>
         </ComboBox>
 
+        <DatePicker Text="Válassz napot" Background="#33FFFFFF" VerticalAlignment="Top"  Grid.Row="2" HorizontalAlignment="Left" Margin="131,38,0,0" Width="178" Grid.Column="1" />
         <Button x:Name="btnSubmit" Content="Foglalás" HorizontalAlignment="Center" Height="50" Margin="0,0,0,0" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
