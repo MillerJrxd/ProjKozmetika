@@ -1,21 +1,11 @@
 ﻿using MySqlConnector;
 using ProjKozmetika.Classes;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ProjKozmetika
 {
@@ -39,35 +29,14 @@ namespace ProjKozmetika
             cbWorker.ItemsSource = dolgozok;
             cbWorker.IsEnabled = false;
             cbDate.IsEnabled = false;
+            dpDate.SelectedDate = DateTime.Now;
+            //cbWorker.SelectedIndex = 0;
+            //cbDate.SelectedIndex = 0;
         }
         private async void Reservation_LoadedAsync(object sender, RoutedEventArgs e)
         {
             await GetServicesAsync();
         }
-        /*private async Task<Task> GetServicesAsync()
-        {
-            try
-            {
-                conn = new MySqlConnection(MainWindow.ConnectionString());
-                await conn.OpenAsync();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message, "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            string query = "SELECT szolgaltatasID, szolgaltatasKategoria, szolgaltatasIdotartam, szolgaltatasAr FROM Szolgáltatás";
-
-            var command = new MySqlCommand(query, conn);
-            var reader = await command.ExecuteReaderAsync();
-
-            while (await reader.ReadAsync())
-            {
-                szolgatatasok.Add(new Szolgaltatas(reader.GetByte(0), reader.GetString(1), reader.GetTimeSpan(2), reader.GetInt32(3)));
-            }
-            await conn.CloseAsync();
-            return Task.CompletedTask;
-        }*/
         private async Task<Task> GetServicesAsync()
         {
             try
@@ -102,7 +71,6 @@ namespace ProjKozmetika
             await conn.CloseAsync();
             return Task.CompletedTask;
         }
-
         private async Task<Task> GetWorkersAsync(byte ID)
         {
             try
@@ -137,19 +105,7 @@ namespace ProjKozmetika
             Szolgaltatas selectedItem = (Szolgaltatas)cbService.SelectedItem;
             dolgozok.Clear();
             await GetWorkersAsync(selectedItem.SzolgID);
-            cbWorker.SelectedIndex = 0;
-            cbDate.SelectedIndex = 0;
             cbDate.IsEnabled = true;
-            cbWorker_SelectionChanged(sender, e);
-        }
-        private void PreviewAppCommandsExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (e.Command == ApplicationCommands.Copy ||
-            e.Command == ApplicationCommands.Cut ||
-            e.Command == ApplicationCommands.Paste)
-            {
-                e.Handled = true;
-            }
         }
         private async void btnUsrSubmit_Click(object sender, RoutedEventArgs e)
         {
@@ -260,6 +216,28 @@ namespace ProjKozmetika
                 this.Close();
             }
         }
+        private async void dpDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dpDate.SelectedDate != null && cbService.SelectedItem != null && cbWorker.SelectedItem != null)
+            {
+                var selectedWorker = cbWorker.SelectedItem as Dolgozo;
+                var selectedService = cbService.SelectedItem as Szolgaltatas;
+                DateTime selectedDate = (DateTime)dpDate.SelectedDate;
+
+                await FilterAvailableTimesAsync(selectedWorker, selectedService, selectedDate);
+            }
+        }
+        private async void cbWorker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbWorker.SelectedItem != null && cbService.SelectedItem != null)
+            {
+                var selectedWorker = cbWorker.SelectedItem as Dolgozo;
+                var selectedService = cbService.SelectedItem as Szolgaltatas;
+                DateTime selectedDate = (DateTime)dpDate.SelectedDate;
+
+                await FilterAvailableTimesAsync(selectedWorker, selectedService, selectedDate);
+            }
+        }
         private void PreviewTextInputString(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex(@"[^\p{L}]+$");
@@ -328,8 +306,9 @@ namespace ProjKozmetika
                         }
 
                         TimeSpan interval = new TimeSpan(0, 15, 0);
-                        times.Clear(); 
+                        times.Clear();
 
+                        // Végigmegyünk az időpontokon és ellenőrizzük, hogy elérhető-e
                         for (TimeSpan time = openingTime; time + selectedService.SzolgaltatasIdeje <= closingTime; time += interval)
                         {
                             bool isAvailable = true;
@@ -339,6 +318,7 @@ namespace ProjKozmetika
                                 TimeSpan bookingStart = booking.Item1;
                                 TimeSpan bookingEnd = booking.Item2;
 
+                                // Ha az időpont beleesik egy másik foglalásba, nem elérhető
                                 if (time < bookingEnd && (time + selectedService.SzolgaltatasIdeje) > bookingStart)
                                 {
                                     isAvailable = false;
@@ -354,22 +334,20 @@ namespace ProjKozmetika
                 }
             }
         }
-        private async void cbWorker_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbWorker.SelectedItem != null && cbService.SelectedItem != null)
-            {
-                var selectedWorker = cbWorker.SelectedItem as Dolgozo;
-                var selectedService = cbService.SelectedItem as Szolgaltatas;
-                DateTime selectedDate = DateTime.Today; // vagy egy kiválasztott dátum a felhasználótól
-
-                await FilterAvailableTimesAsync(selectedWorker, selectedService, selectedDate);
-            }
-        }
         private int GenerateRandomPoints()
         {
             Random rnd = new Random();
 
-            return (rnd.Next(50,501) / 10) * 10;
+            return (rnd.Next(50, 501) / 10) * 10;
+        }
+        private void PreviewAppCommandsExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Copy ||
+            e.Command == ApplicationCommands.Cut ||
+            e.Command == ApplicationCommands.Paste)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

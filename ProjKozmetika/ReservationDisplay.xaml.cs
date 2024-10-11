@@ -76,48 +76,24 @@ namespace ProjKozmetika
                     using (var conn = new MySqlConnection(MainWindow.ConnectionString()))
                     {
                         await conn.OpenAsync();
-
-                        string query = @"DELETE FROM foglalás WHERE foglalasID = @foglalasID";
-                        //addReservationCommand.Parameters.AddWithValue("@szolgaltatasID", selectedService.SzolgID);
-
-                        using (var command = new MySqlCommand(query, conn))
+                        for (int i = dgReservations.SelectedItems.Count - 1; i >= 0; i--)
                         {
-                            command.Parameters.AddWithValue("@foglalasID", selectedReservation.FoglalasID);
+                            DisplayReservation reservation = (DisplayReservation)dgReservations.SelectedItem;
+                            string query = @"DELETE FROM foglalás WHERE foglalasID = @foglalasID";
+                            using (var command = new MySqlCommand(query, conn))
+                            {
+                                command.Parameters.AddWithValue("@foglalasID", selectedReservation.FoglalasID);
 
-                            await command.ExecuteNonQueryAsync();
+                                await command.ExecuteNonQueryAsync();
+                            }
                         }
+                        reservation.Remove(selectedReservation);
                     }
-                    RemoveFromCollection(selectedReservation.FoglalasID);
                     await LoadReservationsAsync();
                 }
                 else MessageBox.Show("Nem jelölhet ki egynél több foglalást!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else MessageBox.Show("A törléshez jelöljön ki egy foglalást!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
-        }
-        private void RemoveFromCollection(int key)
-        {
-            int left = 0;
-            int right = reservation.Count - 1;
-
-            while (left <= right)
-            {
-                int mid = (left + right) / 2;
-                var currentReservation = reservation[mid];
-
-                if (currentReservation.FoglalasID == key)
-                {
-                    reservation.RemoveAt(mid);
-                    return;
-                }
-                else if (currentReservation.FoglalasID < key)
-                {
-                    left = mid + 1;
-                }
-                else
-                {
-                    right = mid - 1;
-                }
-            }
         }
     }
 }

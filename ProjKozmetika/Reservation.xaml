@@ -8,7 +8,6 @@
         Title="Foglalás" MaxHeight="450" MinHeight="450" MaxWidth="900" MinWidth="610"  Height="450" Width="850"  WindowStartupLocation="CenterScreen">
     <Grid>
 
-
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#96FB0861" Offset="1"/>
@@ -35,14 +34,82 @@
         </Border>
 
         <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Foreground="White"><Run Language="hu-hu" Text="Vezetéknév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtUsrFirstName" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" PreviewTextInput="PreviewTextInputString"/>
+        <TextBox x:Name="txtUsrFirstName" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" 
+                     Background="#33FFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" Foreground="White" PreviewTextInput="PreviewTextInputString" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Grid.Row="1" Foreground="White"><Run Language="hu-hu" Text="Keresztnév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtUsrLastName" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="1" PreviewTextInput="PreviewTextInputString"/>
+        <TextBox x:Name="txtUsrLastName" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#33FFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" Grid.Row="1" 
+                 Foreground="White" PreviewTextInput="PreviewTextInputString" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Grid.Row="2" Foreground="White"><Run Language="hu-hu" Text="Email"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtUsrEmail" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="2"/>
+        <TextBox x:Name="txtUsrEmail" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="225" FontFamily="Century Gothic"
+                 FontSize="17" Background="#33FFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" 
+                 Grid.Row="2" Foreground="White" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
         <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Grid.Row="3" Foreground="White"><Run Language="hu-hu" Text="Telefonszám"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtUsrPhone" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="3" PreviewTextInput="PreviewNumInput"/>
-        <ComboBox x:Name="cbWorker" Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,48,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding Dolgozok}" 
+        <TextBox x:Name="txtUsrPhone" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" 
+                 FontSize="17" Foreground="White" Background="#33FFFFFF" BorderBrush="White" 
+                 SelectionBrush="#FFF7F7E9" Grid.Row="3" PreviewTextInput="PreviewNumInput" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <ComboBox x:Name="cbWorker" Grid.Column="1" HorizontalAlignment="Left" 
+                      Height="37" Margin="131,42,0,0" 
+                      VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" 
+                      FontSize="17" Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding Dolgozok}"
           DisplayMemberPath="DolgozoFullName" SelectionChanged="cbWorker_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -51,11 +118,14 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <TextBlock Width="161" VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,18,0,0" Height="23" HorizontalAlignment="Center" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Grid.Row="1" Foreground="White"><Run
+        <TextBlock Width="162" VerticalAlignment="Top" TextWrapping="Wrap" Margin="139,16,0,0" Height="23" HorizontalAlignment="Left" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Foreground="White" Grid.Row="1"><Run
                 Language="hu-hu" Text="Dolgozó választás"/><LineBreak
         /><Run
                 Language="hu-hu"/></TextBlock>
-        <ComboBox x:Name="cbService" Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,48,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" IsReadOnly="True" ItemsSource="{Binding Szolgaltatasok}" 
+        <ComboBox x:Name="cbService" Grid.Column="1" HorizontalAlignment="Left" Height="37" 
+                      Margin="126,53,0,0" VerticalAlignment="Top" Width="178" 
+                      FontFamily="Century Gothic" FontSize="17" IsReadOnly="True"
+                      BorderBrush="White" ItemsSource="{Binding Szolgaltatasok}" 
           DisplayMemberPath="SzolgKategoria" SelectionChanged="cbService_SelectionChanged">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -64,15 +134,15 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,18,0,0" Height="23" HorizontalAlignment="Center" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Foreground="White"><Run
+        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="122,27,0,0" Height="23" HorizontalAlignment="Left" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Foreground="White"><Run
                 Language="hu-hu" Text="Szolgáltatás választás"/><LineBreak
         /><Run
                 Language="hu-hu"/></TextBlock>
-        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,18,0,0" Height="23" HorizontalAlignment="Center" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Grid.Row="2" Foreground="White"><Run
+        <TextBlock VerticalAlignment="Top" TextWrapping="Wrap" Margin="144,10,0,0" Height="23" HorizontalAlignment="Left" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Grid.Row="2" Foreground="White"><Run
                 Language="hu-hu" Text="Időpont választás"/><LineBreak
         /><Run
                 Language="hu-hu"/></TextBlock>
-        <ComboBox x:Name="cbDate" Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,48,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="2" IsReadOnly="True">
+        <ComboBox x:Name="cbDate" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="131,67,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" Grid.Row="2" IsReadOnly="True">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
@@ -81,7 +151,8 @@
             </ComboBox.Background>
         </ComboBox>
 
-        <Button x:Name="btnUsrSubmit" Content="Foglalás" HorizontalAlignment="Center" Height="50" Margin="0,0,0,0" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Click="btnUsrSubmit_Click">
+        <DatePicker x:Name="dpDate" Background="#33FFFFFF" VerticalAlignment="Top"  Grid.Row="2" HorizontalAlignment="Left" Margin="131,38,0,0" Width="178" Grid.Column="1" SelectedDateChanged="dpDate_SelectedDateChanged" />
+        <Button x:Name="btnSubmit" Content="Foglalás" HorizontalAlignment="Center" Height="50" Margin="0,0,0,0" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Click="btnUsrSubmit_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFE669B2"/>
