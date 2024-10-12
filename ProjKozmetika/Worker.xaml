@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjKozmetika"
         mc:Ignorable="d"
-        Title="Worker" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Új dolgozó felvétele" Height="450" Width="800" MinHeight="450" MaxHeight="450" MinWidth="800" MaxWidth="800" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -17,10 +17,12 @@
 
 
     <Grid>
+
+
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#96485E94" Offset="1"/>
-                <GradientStop Color="#FFEB97F9" Offset="0"/>
+                <GradientStop Color="#96FB08C3" Offset="1"/>
+                <GradientStop Color="#FF991DEA" Offset="0"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -31,9 +33,97 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Image HorizontalAlignment="center" Height="361" Margin="0,40,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="158" Grid.ColumnSpan="2" Source="/Images/tulipant.png"/>
+        <Border CornerRadius="20" Background="#66FDFDFD" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="4">
+            <TextBlock Grid.RowSpan="4" HorizontalAlignment="Left" Height="420" TextAlignment="Center" FontSize="16" Width="300"/>
+        </Border>
+
+        <Border CornerRadius="20" Background="#66FDFDFD" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="4" Grid.Column="1">
+            <TextBlock Grid.RowSpan="4" HorizontalAlignment="Left" Height="420" TextAlignment="Center" FontSize="16" Width="300"/>
+        </Border>
+
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Foreground="White"><Run Language="hu-hu" Text="Vezetéknév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgFirstName" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#33FFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" Foreground="White">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Grid.Row="1" Foreground="White"><Run Language="hu-hu" Text="Keresztnév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgLastName" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#33FFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" Grid.Row="1" Foreground="White">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Grid.Row="2" Foreground="White"><Run Language="hu-hu" Text="Email"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgEmail" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="225" FontFamily="Century Gothic" FontSize="17" Background="#33FFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" Grid.Row="2" Foreground="White">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Grid.Row="3" Foreground="White"><Run Language="hu-hu" Text="Telefonszám"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgPhone" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Foreground="White" Background="#33FFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" Grid.Row="3">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <ComboBox x:Name="cbWorkCategory" Grid.Column="1" HorizontalAlignment="Center" Height="37" Margin="0,0,0,0" VerticalAlignment="Top" Width="178" FontFamily="Century Gothic" FontSize="17" IsReadOnly="True" Grid.Row="1">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#4CFFFFFF" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <TextBlock VerticalAlignment="Bottom" TextWrapping="Wrap" Margin="0,72,0,0" Height="24" HorizontalAlignment="Center" FontSize="18" FontFamily="Century Gothic" Grid.Column="1" Foreground="White"><Run
+            Language="hu-hu" Text="Munkakör"/><LineBreak
+    /><Run
+            Language="hu-hu"/></TextBlock>
+
+        <CheckBox Grid.Column="1" Content="" HorizontalAlignment="Left" Height="25" Margin="111,96,0,0" Grid.Row="1" VerticalAlignment="Top" Width="28" FontFamily="Century Gothic" IsChecked="True" Style="{DynamicResource CheckBoxStyle1}" IsEnabled="False" Grid.RowSpan="2"/>
+        <TextBlock Grid.Column="1" Foreground="White" HorizontalAlignment="Left" Height="22" Margin="144,100,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontFamily="Century Gothic" FontSize="18" Grid.RowSpan="2"><Run Language="hu-hu" Text="Aktív a dolgozó?"/></TextBlock>
 
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Vezetéknév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
         <TextBox x:Name="txtDolgFirstName" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewTextInputString"/>
@@ -52,7 +142,21 @@
         <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontSize="18" FontFamily="Century Gothic" Grid.Column="1"><Run Language="hu-hu" Text="Munkaköre"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
         <CheckBox x:Name="chkWorkerStatus" Grid.Column="1" Content="" HorizontalAlignment="Left" Height="25" Margin="149,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="29" FontFamily="Century Gothic" IsChecked="True" Style="{DynamicResource CheckBoxStyle1}" IsEnabled="False"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="183,58,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontFamily="Century Gothic" FontSize="16"><Run Language="hu-hu" Text="Aktív a dolgozó?"/></TextBlock>
-        <Button x:Name="btnDolgSubmit" Grid.Column="1" Content="Felvétel" HorizontalAlignment="Left" Height="43" Margin="147,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="157" Background="#4CFFFFFF" FontFamily="Century Gothic" FontSize="17" Click="btnDolgSubmit_Click"/>
+        <Button x:Name="btnDolgSubmit" Content="Felvétel" HorizontalAlignment="Center" Height="50" Margin="0,82,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Grid.RowSpan="2" Click="btnDolgSubmit_Click">
+          <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE669B2"/>
+                    <GradientStop Color="#FF3DACC4" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
         <Rectangle x:Name="recBouding" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="145,50,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="38" MouseEnter="Rectangle_MouseEnter" MouseLeave="recBouding_MouseLeave" Focusable="True" Opacity="0">
             <ToolTipService.ToolTip>
                 <ToolTip Content="Ez egy teszt ToolTip."/>

@@ -6,15 +6,16 @@
         xmlns:local="clr-namespace:ProjKozmetika" 
         xmlns:localConvert="clr-namespace:ProjKozmetika.Classes"
         mc:Ignorable="d"
-        Title="WorkerDisplay" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
+        Title="WorkerDisplay" Height="450" Width="800" MinHeight="450" MinWidth="800" MaxHeight="450" MaxWidth="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <localConvert:BoolToStringConverter x:Key="BoolToStringConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#96485E94" Offset="1"/>
-                <GradientStop Color="#FFEB97F9" Offset="0"/>
+                <GradientStop Color="#96A40DD5" Offset="1"/>
+                <GradientStop Color="#FFDF13B0" Offset="0.001"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -35,6 +36,21 @@
                 <DataGridTextColumn Header="Dolgozó Szolgáltatása" Binding="{Binding DolgozoSzolgaltatasa}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnEditWorker" Grid.Column="1" Content="Dolgozó módosítása" HorizontalAlignment="Center" Height="39" Margin="0,198,0,0" VerticalAlignment="Top" Width="155" FontSize="16" Background="#4CFFFFFF" Grid.RowSpan="2" Click="btnEditWorker_Click"/>
+        <Image HorizontalAlignment="Center" Height="385" VerticalAlignment="Center" Width="389" Source="/Images/szelfker.png" Grid.Column="2" Grid.Row="1">
+        <Button x:Name="btnEditWorker" Content="Módosítás" HorizontalAlignment="Center" Height="50" Margin="0,74,0,0" Grid.Column="1" VerticalAlignment="Top" Width="164" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Click="btnEditWorker_Click">
+          <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE669B2"/>
+                    <GradientStop Color="#FF3DACC4" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjKozmetika"
         mc:Ignorable="d"
-        Title="ReservationDisplay" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ReservationDisplay" Height="450" Width="800" MinHeight="450" MinWidth="800" MaxHeight="450" MaxWidth="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#96485E94" Offset="1"/>
-                <GradientStop Color="#FFEB97F9" Offset="0"/>
+                <GradientStop Color="#96FB08CC" Offset="1"/>
+                <GradientStop Color="#FF9F29E0" Offset="0"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -30,6 +30,21 @@
                 <DataGridTextColumn Header="Foglalás Időpont" Binding="{Binding FoglalasStart, StringFormat='yyyy.MM.dd HH:mm'}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnDeleteReservation" Grid.Column="1" Content="Foglalás törlés" HorizontalAlignment="Center" Height="39" Margin="0,198,0,0" VerticalAlignment="Top" Width="155" FontSize="16" Background="#4CFFFFFF" Grid.RowSpan="2" Click="btnDeleteReservation_ClickAsync"/>
+        <Button x:Name="btnDeleteReservation" Content="Törlés" HorizontalAlignment="Center" Height="50" Margin="0,74,0,0" Grid.Column="1" VerticalAlignment="Top" Width="164" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Click="btnDeleteReservation_ClickAsync">
+          <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE669B2"/>
+                    <GradientStop Color="#FFDD2B2B" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Image HorizontalAlignment="Left" Height="195" VerticalAlignment="Top" Width="195" Source="/Images/hajnyiras.png" Grid.Row="1" Grid.ColumnSpan="2" Margin="592,10,0,0"/>
     </Grid>
 </Window>

@@ -153,7 +153,6 @@
                 </LinearGradientBrush>
             </ComboBox.Background>
         </ComboBox>
-
         <DatePicker x:Name="dpDate" Background="#33FFFFFF" VerticalAlignment="Top"  Grid.Row="2" HorizontalAlignment="Left" Margin="131,38,0,0" Width="178" Grid.Column="1" SelectedDateChanged="dpDate_SelectedDateChanged" />
         <Button x:Name="btnSubmit" Content="Foglalás" HorizontalAlignment="Center" Height="50" Margin="0,0,0,0" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Click="btnUsrSubmit_Click">
             <Button.Background>

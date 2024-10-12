@@ -30,7 +30,7 @@
 
 
 
-        <Image HorizontalAlignment="Left" Height="219" Margin="271,40,0,0" VerticalAlignment="Top" Width="210" Source="/Images/virag.png" Grid.Row="4" Grid.Column="1"/>
+        <Image HorizontalAlignment="Left" Height="219" Margin="260,148,0,0" VerticalAlignment="Top" Width="210" Source="/Images/virag.png" Grid.Row="3" Grid.Column="1" Grid.RowSpan="2"/>
 
 
         <Border CornerRadius="20" Background="#66FDFDFD" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
@@ -48,9 +48,14 @@
         <Button x:Name="btnNewReservation" Content="Új foglalás" HorizontalAlignment="Center" Height="45" Margin="0,87,0,0" Grid.Row="1" VerticalAlignment="Top" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Click="btnNewReservation_Click" Grid.ColumnSpan="2" Foreground="White" Padding="10">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="20">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#A8E2E2E2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -58,9 +63,14 @@
         <Button x:Name="btnNewWorker" Content="Új felvétele" HorizontalAlignment="Left" Height="45" Margin="175,87,0,0" Grid.Row="2" VerticalAlignment="Top" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Foreground="White" Click="btnNewWorker_Click" Padding="10">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="20">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#A8E2E2E2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -68,9 +78,14 @@
         <Button x:Name="btnWorkerEdit" Content="Módosítás" HorizontalAlignment="Left" Height="45" Margin="31,87,0,0" Grid.Row="2" VerticalAlignment="Top" Width="270" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Grid.Column="1" Foreground="White" Padding="10" Click="btnWorkerEdit_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="20">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#A8E2E2E2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -78,9 +93,14 @@
         <Button x:Name="btnReservationShow" Content="Foglalások megjelenítése" HorizontalAlignment="Center" Height="45" Margin="0,87,0,0" Grid.Row="3" VerticalAlignment="Top" Width="330" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Grid.ColumnSpan="2" Click="btnReservationShow_Click" Foreground="White" Padding="10">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="20">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#A8E2E2E2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -88,9 +108,14 @@
         <Button x:Name="btnNewService" Content="Új felvétele" HorizontalAlignment="Left" Height="46" Margin="175,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Foreground="White" Padding="10" Click="btnNewService_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="20">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#A8E2E2E2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -98,12 +123,18 @@
         <Button x:Name="btnServiceEdit" Content="Módosítás" HorizontalAlignment="Left" Height="46" Margin="31,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Grid.Column="1" Foreground="White" Padding="10" Click="btnServiceEdit_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="20">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="#A8E2E2E2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
 
         <Path Grid.ColumnSpan="2" Fill="White" HorizontalAlignment="Center" Height="1" Grid.Row="1" Stroke="White" Stretch="Fill" VerticalAlignment="Top" Width="750">
             <Path.Data>
@@ -127,7 +158,7 @@
                 <PathGeometry Figures="M0,626.08696 L803,626.08696"/>
             </Path.Data>
         </Path>
-        <Image HorizontalAlignment="Left" Height="210" VerticalAlignment="Top" Width="225" Source="/Images/viragtukrozve.png" Grid.Row="2" Margin="-7,167,0,0" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
+        <Image HorizontalAlignment="Left" Height="194" VerticalAlignment="Top" Width="203" Source="/Images/viragtukrozve.png" Grid.Row="2" Margin="-1,150,0,0" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -137,7 +168,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image HorizontalAlignment="Left" Height="219" Margin="253,113,0,0" VerticalAlignment="Top" Width="210" Source="/Images/virag.png" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
+        <Image HorizontalAlignment="Left" Height="219" Margin="229,90,0,0" VerticalAlignment="Top" Width="210" Source="/Images/virag.png" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
