@@ -24,7 +24,7 @@ namespace ProjKozmetika.Classes
             this.Szolgaltatas = szolgaltatas;
         }
 
-        public string DolgozoFullName => $"{DolgLastName} {DolgFirstName}";
+        public Dolgozo() { }
 
         public byte DolgozoId { get => dolgozoId; set => dolgozoId = value; }
         public string DolgFirstName { get => dolgFirstName; set => dolgFirstName = value; }
@@ -33,5 +33,6 @@ namespace ProjKozmetika.Classes
         public string DolgEmail { get => dolgEmail; set => dolgEmail = value; }
         public bool Status { get => status; set => status = value; }
         public byte Szolgaltatas { get => szolgaltatas; set => szolgaltatas = value; }
+        public string DolgozoFullName => $"{DolgLastName} {DolgFirstName}";
     }
 }

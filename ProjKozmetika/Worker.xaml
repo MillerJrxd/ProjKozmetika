@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjKozmetika"
         mc:Ignorable="d"
-        Title="Új dolgozó felvétele" Height="450" Width="800" MinHeight="450" MaxHeight="450" MinWidth="800" MaxWidth="800">
+        Title="Új dolgozó felvétele" Height="450" Width="800" MinHeight="450" MaxHeight="450" MinWidth="800" MaxWidth="800" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -125,8 +125,25 @@
         <CheckBox Grid.Column="1" Content="" HorizontalAlignment="Left" Height="25" Margin="111,96,0,0" Grid.Row="1" VerticalAlignment="Top" Width="28" FontFamily="Century Gothic" IsChecked="True" Style="{DynamicResource CheckBoxStyle1}" IsEnabled="False" Grid.RowSpan="2"/>
         <TextBlock Grid.Column="1" Foreground="White" HorizontalAlignment="Left" Height="22" Margin="144,100,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontFamily="Century Gothic" FontSize="18" Grid.RowSpan="2"><Run Language="hu-hu" Text="Aktív a dolgozó?"/></TextBlock>
 
-        <Button x:Name="btnDolgSubmit" Content="Felvétel" HorizontalAlignment="Center" Height="50" Margin="0,82,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Grid.RowSpan="2">
-            <Button.Background>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Vezetéknév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgFirstName" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewTextInputString"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic" Grid.Row="1"><Run Language="hu-hu" Text="Keresztnév"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgLastName" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="1" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewTextInputString"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="20,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic" Grid.Row="2"><Run Language="hu-hu" Text="Email"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgEmail" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="2" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="21,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" FontSize="18" FontFamily="Century Gothic" Grid.Row="3"><Run Language="hu-hu" Text="Telefonszám"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtDolgPhone" HorizontalAlignment="Left" Height="25" Margin="20,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" Grid.Row="3" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewNumInput" MouseEnter="txtDolgPhone_MouseEnter" MouseLeave="txtDolgPhone_MouseLeave">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Ez egy teszt ToolTip."/>
+            </ToolTipService.ToolTip>
+        </TextBox>
+        <ComboBox x:Name="cbWorkCategory" Grid.Column="1" HorizontalAlignment="Left" Height="44" Margin="145,54,0,0" VerticalAlignment="Top" Width="192" ItemsSource="{Binding Szolgaltatasok}" 
+          DisplayMemberPath="SzolgKategoria"/>
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontSize="18" FontFamily="Century Gothic" Grid.Column="1"><Run Language="hu-hu" Text="Munkaköre"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <CheckBox x:Name="chkWorkerStatus" Grid.Column="1" Content="" HorizontalAlignment="Left" Height="25" Margin="149,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="29" FontFamily="Century Gothic" IsChecked="True" Style="{DynamicResource CheckBoxStyle1}" IsEnabled="False"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="21" Margin="183,58,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontFamily="Century Gothic" FontSize="16"><Run Language="hu-hu" Text="Aktív a dolgozó?"/></TextBlock>
+        <Button x:Name="btnDolgSubmit" Content="Felvétel" HorizontalAlignment="Center" Height="50" Margin="0,82,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Grid.RowSpan="2" Click="btnDolgSubmit_Click">
+          <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFE669B2"/>
                     <GradientStop Color="#FF3DACC4" Offset="1"/>
@@ -140,5 +157,10 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <Rectangle x:Name="recBouding" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="145,50,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="38" MouseEnter="Rectangle_MouseEnter" MouseLeave="recBouding_MouseLeave" Focusable="True" Opacity="0">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Ez egy teszt ToolTip."/>
+            </ToolTipService.ToolTip>
+        </Rectangle>
     </Grid>
 </Window>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="ProjKozmetika.Service"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjKozmetika"
+        mc:Ignorable="d"
+        Title="Service" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#96485E94" Offset="1"/>
+                <GradientStop Color="#FFEB97F9" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="304,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Szolgáltatás neve"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtServiceName" HorizontalAlignment="Left" Height="25" Margin="298,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewTextInputString"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="312,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Szolgáltatás Ára"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <TextBox x:Name="txtServicePrice" HorizontalAlignment="Left" Height="25" Margin="298,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewNumInput"/>
+        <Button x:Name="btnServiceSubmit" Content="Felvétel" HorizontalAlignment="Left" Height="43" Margin="309,142,0,0" Grid.Row="1" VerticalAlignment="Top" Width="157" Background="#4CFFFFFF" FontFamily="Century Gothic" FontSize="17" Click="btnServiceSubmit_Click"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="306,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Szolgáltatás Ideje"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <ComboBox x:Name="cbServiceTime" HorizontalAlignment="Left" Height="40" Margin="298,13,0,0" Grid.Row="1" VerticalAlignment="Top" Width="180" ItemsSource="{Binding Times}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding StringFormat='{}{0:hh\\:mm\\:ss}'}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </Grid>
+</Window>
