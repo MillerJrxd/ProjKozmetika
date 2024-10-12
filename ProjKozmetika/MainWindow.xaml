@@ -85,7 +85,7 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="btnNewService" Content="Új felvétele" HorizontalAlignment="Left" Height="46" Margin="175,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Foreground="White" Padding="10">
+        <Button x:Name="btnNewService" Content="Új felvétele" HorizontalAlignment="Left" Height="46" Margin="175,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Foreground="White" Padding="10" Click="btnNewService_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" CornerRadius="20">
@@ -95,7 +95,7 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="btnServiceEdit" Content="Módosítás" HorizontalAlignment="Left" Height="46" Margin="31,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Grid.Column="1" Foreground="White" Padding="10">
+        <Button x:Name="btnServiceEdit" Content="Módosítás" HorizontalAlignment="Left" Height="46" Margin="31,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="240" FontSize="26" FontFamily="Century Gothic" Background="#66E2E2E2" Grid.Column="1" Foreground="White" Padding="10" Click="btnServiceEdit_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}" CornerRadius="20">

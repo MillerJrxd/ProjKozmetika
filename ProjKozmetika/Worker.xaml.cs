@@ -88,7 +88,6 @@ namespace ProjKozmetika
                 e.Handled = true;
             }
         }
-
         private async Task<Task> GetExsistingServices()
         {
             using (var conn = new MySqlConnection(MainWindow.ConnectionString()))

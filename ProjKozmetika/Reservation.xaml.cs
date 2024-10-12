@@ -188,12 +188,10 @@ namespace ProjKozmetika
                             }
                         }
                     }
-
                     // Foglalás időpontok kiszámítása
                     TimeSpan foglalasStart = (TimeSpan)cbDate.SelectedItem;
                     TimeSpan foglalasEnd = foglalasStart.Add(selectedService.SzolgaltatasIdeje);
 
-                    // Foglalás hozzáadása a Foglalás táblába az ügyfél ID alapján
                     string addReservationQuery = @"INSERT INTO Foglalás (szolgaltatasID, dolgozoID, ugyfelID, foglalasStart, foglalasEnd) 
                                    VALUES (@szolgaltatasID, @dolgozoID, @ugyfelID, @foglalasStart, @foglalasEnd)";
 

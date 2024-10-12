@@ -34,6 +34,16 @@ namespace ProjKozmetika
             WorkerDisplay workerDisplay = new WorkerDisplay();
             workerDisplay.ShowDialog();
         }
+        private void btnServiceEdit_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceDisplay serviceDisplay = new ServiceDisplay();
+            serviceDisplay.ShowDialog();
+        }
+        private void btnNewService_Click(object sender, RoutedEventArgs e)
+        {
+            Service service = new Service(false);
+            service.ShowDialog();
+        }
         public static string ConnectionString()
         {
             return "server=localhost;port=3306;uid=root;database=kozmetika";
