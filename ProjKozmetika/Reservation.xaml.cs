@@ -30,8 +30,6 @@ namespace ProjKozmetika
             cbWorker.IsEnabled = false;
             cbDate.IsEnabled = false;
             dpDate.SelectedDate = DateTime.Now;
-            //cbWorker.SelectedIndex = 0;
-            //cbDate.SelectedIndex = 0;
         }
         private async void Reservation_LoadedAsync(object sender, RoutedEventArgs e)
         {
@@ -49,12 +47,11 @@ namespace ProjKozmetika
                 MessageBox.Show(ex.Message, "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            // Lekérdezzük az összes szolgáltatást és azokhoz tartozó dolgozókat
             string query = @"SELECT DISTINCT Szolgáltatás.szolgaltatasID, Szolgáltatás.szolgaltatasKategoria, 
                             Szolgáltatás.szolgaltatasIdotartam, Szolgáltatás.szolgaltatasAr
                      FROM Szolgáltatás
                      JOIN Dolgozók ON Dolgozók.szolgáltatasa = Szolgáltatás.szolgaltatasID
-                     WHERE Dolgozók.statusz = 1"; // Csak aktív dolgozók
+                     WHERE Dolgozók.statusz = 1"; 
 
             var command = new MySqlCommand(query, conn);
             var reader = await command.ExecuteReaderAsync();
@@ -62,12 +59,11 @@ namespace ProjKozmetika
             while (await reader.ReadAsync())
             {
                 szolgatatasok.Add(new Szolgaltatas(
-                    reader.GetByte(0),   // szolgaltatasID
-                    reader.GetString(1),  // szolgaltatasKategoria
-                    reader.GetTimeSpan(2),// szolgaltatasIdotartam
-                    reader.GetInt32(3))); // szolgaltatasAr
+                    reader.GetByte(0),   
+                    reader.GetString(1), 
+                    reader.GetTimeSpan(2),
+                    reader.GetInt32(3))); 
             }
-
             await conn.CloseAsync();
             return Task.CompletedTask;
         }
@@ -158,10 +154,10 @@ namespace ProjKozmetika
 
                     using (var checkCustomerCommand = new MySqlCommand(checkCustomerQuery, conn))
                     {
-                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelFirstName", txtUsrFirstName.Text);
-                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelLastName", txtUsrLastName.Text);
-                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelTel", txtUsrPhone.Text);
-                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelEmail", txtUsrEmail.Text);
+                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelFirstName", txtUsrFirstName.Text.Trim());
+                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelLastName", txtUsrLastName.Text.Trim());
+                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelTel", txtUsrPhone.Text.Trim());
+                        checkCustomerCommand.Parameters.AddWithValue("@ugyfelEmail", txtUsrEmail.Text.Trim());
 
                         var result = await checkCustomerCommand.ExecuteScalarAsync();
 
@@ -177,10 +173,10 @@ namespace ProjKozmetika
 
                             using (var addCustomerCommand = new MySqlCommand(addCustomerQuery, conn))
                             {
-                                addCustomerCommand.Parameters.AddWithValue("@ugyfelFirstName", txtUsrFirstName.Text);
-                                addCustomerCommand.Parameters.AddWithValue("@ugyfelLastName", txtUsrLastName.Text);
-                                addCustomerCommand.Parameters.AddWithValue("@ugyfelTel", txtUsrPhone.Text);
-                                addCustomerCommand.Parameters.AddWithValue("@ugyfelEmail", txtUsrEmail.Text);
+                                addCustomerCommand.Parameters.AddWithValue("@ugyfelFirstName", txtUsrFirstName.Text.Trim());
+                                addCustomerCommand.Parameters.AddWithValue("@ugyfelLastName", txtUsrLastName.Text.Trim());
+                                addCustomerCommand.Parameters.AddWithValue("@ugyfelTel", txtUsrPhone.Text.Trim());
+                                addCustomerCommand.Parameters.AddWithValue("@ugyfelEmail", txtUsrEmail.Text.Trim());
                                 addCustomerCommand.Parameters.AddWithValue("@ugyfelPontok", GenerateRandomPoints());
 
                                 await addCustomerCommand.ExecuteNonQueryAsync();
@@ -238,6 +234,20 @@ namespace ProjKozmetika
                 await FilterAvailableTimesAsync(selectedWorker, selectedService, selectedDate);
             }
         }
+        private void txtUsrPhone_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ToolTip tooltip = new ToolTip();
+            tooltip.Content = "Elvárt telefonszám formátum: '06301234567'.";
+            txtUsrPhone.ToolTip = tooltip;
+
+            ToolTipService.SetInitialShowDelay(txtUsrPhone, 0);
+            ToolTipService.SetShowDuration(txtUsrPhone, 5000); // 5 másodpercig látható
+            ToolTipService.SetToolTip(txtUsrPhone, tooltip);
+        }
+        private void txtUsrPhone_MouseLeave(object sender, MouseEventArgs e)
+        {
+            txtUsrPhone.ToolTip = null;
+        }
         private void PreviewTextInputString(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex(@"[^\p{L}]+$");
@@ -263,7 +273,7 @@ namespace ProjKozmetika
             Regex regex = new Regex(@"[^\d]");
             e.Handled |= regex.IsMatch(e.Text);
         }
-        public bool IsValidEmail(string email)
+        private bool IsValidEmail(string email)
         {
             try
             {

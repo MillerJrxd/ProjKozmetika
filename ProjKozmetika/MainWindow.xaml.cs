@@ -14,10 +14,6 @@ namespace ProjKozmetika
         {
             InitializeComponent();
         }
-        public static string ConnectionString()
-        {
-            return "server=localhost;port=3306;uid=root;database=kozmetika";
-        }
         private void btnNewReservation_Click(object sender, RoutedEventArgs e)
         {
             Reservation reservation = new Reservation();
@@ -30,8 +26,17 @@ namespace ProjKozmetika
         }
         private void btnNewWorker_Click(object sender, RoutedEventArgs e)
         {
-            Worker worker = new Worker();
+            Worker worker = new Worker(false);
             worker.ShowDialog();
+        }
+        private void btnWorkerEdit_Click(object sender, RoutedEventArgs e)
+        {
+            WorkerDisplay workerDisplay = new WorkerDisplay();
+            workerDisplay.ShowDialog();
+        }
+        public static string ConnectionString()
+        {
+            return "server=localhost;port=3306;uid=root;database=kozmetika";
         }
     }
 }

@@ -91,7 +91,10 @@
         <TextBox x:Name="txtUsrPhone" HorizontalAlignment="Center" Height="25" Margin="0,60,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" 
                  FontSize="17" Foreground="White" Background="#33FFFFFF" BorderBrush="White" 
-                 SelectionBrush="#FFF7F7E9" Grid.Row="3" PreviewTextInput="PreviewNumInput" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted">
+                 SelectionBrush="#FFF7F7E9" Grid.Row="3" PreviewTextInput="PreviewNumInput" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" MouseLeave="txtUsrPhone_MouseLeave" MouseEnter="txtUsrPhone_MouseEnter">
+            <ToolTipService.ToolTip>
+                <ToolTip Content="Ez egy teszt ToolTip."/>
+            </ToolTipService.ToolTip>
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Setter Property="Template">

@@ -13,20 +13,18 @@ namespace ProjKozmetika
         MySqlConnection conn;
         ObservableCollection<DisplayReservation> reservation = new ObservableCollection<DisplayReservation>();
 
-
         public ReservationDisplay()
         {
             InitializeComponent();
             dgReservations.ItemsSource = reservation;
             this.DataContext = this;
-            Loaded +=ReservationDisplayAsync_Loaded;
+            Loaded += ReservationDisplayAsync_Loaded;
 
         }
         private async void ReservationDisplayAsync_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadReservationsAsync();
         }
-
         private async Task<Task> LoadReservationsAsync()
         {
             using (var conn = new MySqlConnection(MainWindow.ConnectionString()))

@@ -13,6 +13,5 @@ namespace ProjKozmetika.Classes
         public string SzolgaltatasNev { get; set; }
         public string DolgozoNev { get; set; }
         public DateTime FoglalasStart { get; set; }
-
     }
 }

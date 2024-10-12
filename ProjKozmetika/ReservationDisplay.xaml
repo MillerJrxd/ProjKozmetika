@@ -21,7 +21,14 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dgReservations" Margin="10,10,10,10" Grid.RowSpan="2" ItemsSource="{Binding DisplayReservation}" RowBackground="#00000000" Background="#4CFFFFFF" HeadersVisibility="Column" FontFamily="Century Gothic" AutoGenerateColumns="True" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid x:Name="dgReservations" Margin="10,10,10,10" Grid.RowSpan="2" ItemsSource="{Binding DisplayReservation}" RowBackground="#00000000" Background="#4CFFFFFF" AutoGenerateColumns="False" HeadersVisibility="Column" FontFamily="Century Gothic" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Foglalás ID" Binding="{Binding FoglalasID}" />
+                <DataGridTextColumn Header="Ügyfél Név" Binding="{Binding UgyfelNev}" />
+                <DataGridTextColumn Header="Szolgáltatás" Binding="{Binding SzolgaltatasNev}" />
+                <DataGridTextColumn Header="Dolgozó Név" Binding="{Binding DolgozoNev}" />
+                <DataGridTextColumn Header="Foglalás Időpont" Binding="{Binding FoglalasStart, StringFormat='yyyy.MM.dd HH:mm'}"/>
+            </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnDeleteReservation" Grid.Column="1" Content="Foglalás törlés" HorizontalAlignment="Center" Height="39" Margin="0,198,0,0" VerticalAlignment="Top" Width="155" FontSize="16" Background="#4CFFFFFF" Grid.RowSpan="2" Click="btnDeleteReservation_ClickAsync"/>
     </Grid>
