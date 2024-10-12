@@ -87,6 +87,7 @@ namespace ProjKozmetika
                         }
                         reservation.Remove(selectedReservation);
                     }
+                    reservation.Clear();
                     await LoadReservationsAsync();
                 }
                 else MessageBox.Show("Nem jelölhet ki egynél több foglalást!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
