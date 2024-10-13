@@ -133,6 +133,18 @@ namespace ProjKozmetika
             {
                 MessageBox.Show("Szolgáltatás kiválasztás nélkül nem lehet időpontot foglalni!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else if (cbWorker.SelectedIndex == -1)
+            {
+                MessageBox.Show("Dolgozó választása nélkül nem lehet időpontot foglalni!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (cbDate.SelectedIndex == -1)
+            {
+                MessageBox.Show("Időpont választása nélkül nem lehet időpontot foglalni!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (dpDate.SelectedDate + (TimeSpan)cbDate.SelectedItem < DateTime.UtcNow.ToLocalTime())
+            {
+                MessageBox.Show("Nem lehet múltbeli időpontra foglalni!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             else
             {
                 var selectedWorker = cbWorker.SelectedItem as Dolgozo;
@@ -239,7 +251,7 @@ namespace ProjKozmetika
             txtUsrPhone.ToolTip = tooltip;
 
             ToolTipService.SetInitialShowDelay(txtUsrPhone, 0);
-            ToolTipService.SetShowDuration(txtUsrPhone, 5000); // 5 másodpercig látható
+            ToolTipService.SetShowDuration(txtUsrPhone, 2500); 
             ToolTipService.SetToolTip(txtUsrPhone, tooltip);
         }
         private void txtUsrPhone_MouseLeave(object sender, MouseEventArgs e)

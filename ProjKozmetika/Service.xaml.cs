@@ -161,7 +161,7 @@ namespace ProjKozmetika
                     txtServiceName.Clear();
                     txtServiceName.Focus();
                 }
-                else if (string.IsNullOrEmpty(txtServicePrice.Text) == true || txtServicePrice.Text.StartsWith("0"))
+                else if (string.IsNullOrEmpty(txtServicePrice.Text) == true || txtServicePrice.Text.StartsWith("0") || int.Parse(txtServicePrice.Text) <  1000)
                 {
                     MessageBox.Show("Hibás vagy hiányzó szolgáltatás ár!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
                     txtServicePrice.Clear();
@@ -209,6 +209,21 @@ namespace ProjKozmetika
             {
                 Times.Add(time);
             }
+        }
+        private void txtServicePrice_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+            ToolTip tooltip = new ToolTip();
+            tooltip.Content = "Egy szolgáltatás minimum össszege nem lehet kisebb mint 1000 forint.";
+            txtServicePrice.ToolTip = tooltip;
+
+            ToolTipService.SetInitialShowDelay(txtServicePrice, 0);
+            ToolTipService.SetShowDuration(txtServicePrice, 2500);
+            ToolTipService.SetToolTip(txtServicePrice, tooltip);
+        }
+        private void txtServicePrice_MouseLeave(object sender, MouseEventArgs e)
+        {
+            txtServicePrice.ToolTip = null;
         }
     }
 }

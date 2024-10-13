@@ -42,7 +42,10 @@
 
         <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FontSize="18" FontFamily="Century Gothic" Foreground="White"><Run Language="hu-hu" Text="Szolgáltatás Ára"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
         
-        <TextBox x:Name="txtServicePrice" HorizontalAlignment="Center" Height="25" Margin="0,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewNumInput" Foreground="White">
+        <TextBox x:Name="txtServicePrice" HorizontalAlignment="Center" Height="25" Margin="0,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewNumInput" Foreground="White" MouseEnter="txtServicePrice_MouseEnter" MouseLeave="txtServicePrice_MouseLeave">
+            <ToolTipService.ToolTip>
+                <ToolTip Content=""/>
+            </ToolTipService.ToolTip>
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Setter Property="Template">

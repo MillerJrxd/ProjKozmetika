@@ -122,7 +122,7 @@ namespace ProjKozmetika
                 recBouding.ToolTip = tooltip;
 
                 ToolTipService.SetInitialShowDelay(recBouding, 0);
-                ToolTipService.SetShowDuration(recBouding, 5000); // 5 másodpercig látható
+                ToolTipService.SetShowDuration(recBouding, 2500); 
                 ToolTipService.SetToolTip(recBouding, tooltip);
             }
         }
@@ -137,7 +137,7 @@ namespace ProjKozmetika
             txtDolgPhone.ToolTip = tooltip;
 
             ToolTipService.SetInitialShowDelay(txtDolgPhone, 0);
-            ToolTipService.SetShowDuration(txtDolgPhone, 5000); // 5 másodpercig látható
+            ToolTipService.SetShowDuration(txtDolgPhone, 2500);
             ToolTipService.SetToolTip(txtDolgPhone, tooltip);
         }
         private void txtDolgPhone_MouseLeave(object sender, MouseEventArgs e)
