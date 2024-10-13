@@ -133,7 +133,6 @@
 
         <CheckBox x:Name="chkWorkerStatus" Grid.Column="1" Content="" HorizontalAlignment="Left" Height="25" Margin="111,96,0,0" Grid.Row="1" VerticalAlignment="Top" Width="28" FontFamily="Century Gothic" IsChecked="True" Style="{DynamicResource CheckBoxStyle1}" IsEnabled="False" Grid.RowSpan="2"/>
         <TextBlock Grid.Column="1" Foreground="White" HorizontalAlignment="Left" Height="22" Margin="144,100,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontFamily="Century Gothic" FontSize="18" Grid.RowSpan="2"><Run Language="hu-hu" Text="Aktív a dolgozó?"/></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" FontSize="18" FontFamily="Century Gothic" Grid.Column="1"><Run Language="hu-hu" Text="Munkaköre"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
         <Button x:Name="btnDolgSubmit" Content="Felvétel" HorizontalAlignment="Center" Height="50" Margin="0,82,0,0" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="260" FontSize="26" FontFamily="Century Gothic" Foreground="White" Padding="10" Grid.RowSpan="2" Click="btnDolgSubmit_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
