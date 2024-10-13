@@ -73,6 +73,7 @@
                     <Border Background="{TemplateBinding Background}" CornerRadius="20">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                    
                 </ControlTemplate>
             </Button.Template>
         </Button>

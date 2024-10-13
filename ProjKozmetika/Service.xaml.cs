@@ -1,22 +1,10 @@
 ﻿using MySqlConnector;
-using ProjKozmetika.Classes;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Mail;
-using System.Security.AccessControl;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ProjKozmetika
 {
@@ -26,7 +14,7 @@ namespace ProjKozmetika
     public partial class Service : Window
     {
         MySqlConnection conn;
-        ObservableCollection<TimeSpan> Times {  get; set; } = new ObservableCollection<TimeSpan>();
+        ObservableCollection<TimeSpan> Times { get; set; } = new ObservableCollection<TimeSpan>();
         private bool editMode;
         private byte editServiceId;
 
@@ -43,7 +31,10 @@ namespace ProjKozmetika
                 return;
             }
             else this.editServiceId = id[0];
-
+            if (editMode == true)
+            {
+                btnServiceSubmit.Content = "Módosítás";
+            }
         }
         private void Service_Loaded(object sender, RoutedEventArgs e)
         {
@@ -58,13 +49,13 @@ namespace ProjKozmetika
             {
                 int unicodeValue = char.ConvertToUtf32(e.Text, 0);
 
-                if ((unicodeValue >= 0x1F600 && unicodeValue <= 0x1F64F) ||   // Arcok
-                  (unicodeValue >= 0x1F300 && unicodeValue <= 0x1F5FF) ||   // Piktogramok
-                  (unicodeValue >= 0x1F680 && unicodeValue <= 0x1F6FF) ||   // Szállítás és térképek
-                  (unicodeValue >= 0x2600 && unicodeValue <= 0x26FF) ||    // Szimbólumok
-                  (unicodeValue >= 0x2700 && unicodeValue <= 0x27BF))       // Dingbatok
+                if ((unicodeValue >= 0x1F600 && unicodeValue <= 0x1F64F) ||   
+                  (unicodeValue >= 0x1F300 && unicodeValue <= 0x1F5FF) ||   
+                  (unicodeValue >= 0x1F680 && unicodeValue <= 0x1F6FF) ||   
+                  (unicodeValue >= 0x2600 && unicodeValue <= 0x26FF) ||    
+                  (unicodeValue >= 0x2700 && unicodeValue <= 0x27BF))       
                 {
-                    e.Handled = true; // Megakadályozzuk a bevitel
+                    e.Handled = true; 
                     return;
                 }
             }
@@ -93,7 +84,7 @@ namespace ProjKozmetika
                     txtServiceName.Clear();
                     txtServiceName.Focus();
                 }
-                else if (string.IsNullOrEmpty(txtServicePrice.Text) == true || txtServicePrice.Text.StartsWith("0"))
+                else if (string.IsNullOrEmpty(txtServicePrice.Text) == true || txtServicePrice.Text.StartsWith("0") || int.Parse(txtServicePrice.Text) < 1000)
                 {
                     MessageBox.Show("Hibás vagy hiányzó szolgáltatás ár!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
                     txtServicePrice.Clear();
@@ -119,8 +110,8 @@ namespace ProjKozmetika
                         using (var checkServiceCommand = new MySqlCommand(checkServiceQuery, conn))
                         {
                             checkServiceCommand.Parameters.AddWithValue("@szolgaltatasKategoria ", txtServiceName.Text.Trim());
-                            checkServiceCommand.Parameters.AddWithValue("@szolgaltatasIdotartam", txtServicePrice.Text.Trim());
-                            checkServiceCommand.Parameters.AddWithValue("@szolgaltatasAr", cbServiceTime.SelectedItem);
+                            checkServiceCommand.Parameters.AddWithValue("@szolgaltatasIdotartam", cbServiceTime.SelectedItem);
+                            checkServiceCommand.Parameters.AddWithValue("@szolgaltatasAr", txtServicePrice.Text.Trim());
 
                             var result = await checkServiceCommand.ExecuteScalarAsync();
 
@@ -136,8 +127,8 @@ namespace ProjKozmetika
                                 using (var addServiceCommand = new MySqlCommand(addWorkerQuery, conn))
                                 {
                                     addServiceCommand.Parameters.AddWithValue("@szolgaltatasKategoria", txtServiceName.Text.Trim());
-                                    addServiceCommand.Parameters.AddWithValue("@szolgaltatasIdotartam", txtServicePrice.Text.Trim());
-                                    addServiceCommand.Parameters.AddWithValue("@szolgaltatasAr", cbServiceTime.SelectedItem);
+                                    addServiceCommand.Parameters.AddWithValue("@szolgaltatasIdotartam", cbServiceTime.SelectedItem);
+                                    addServiceCommand.Parameters.AddWithValue("@szolgaltatasAr", txtServicePrice.Text.Trim());
 
                                     await addServiceCommand.ExecuteNonQueryAsync();
                                 }
@@ -181,14 +172,14 @@ namespace ProjKozmetika
                         string updateServiceQuery = @"UPDATE szolgáltatás
                                          SET szolgaltatasKategoria = @szolgaltatasKategoria, 
                                              szolgaltatasIdotartam = @szolgaltatasIdotartam, 
-                                             szolgaltatasAr = @szolgaltatasAr, 
+                                             szolgaltatasAr = @szolgaltatasAr 
                                          WHERE szolgaltatasID = @szolgaltatasID";
 
                         using (var updateWorkerCommand = new MySqlCommand(updateServiceQuery, conn))
                         {
                             updateWorkerCommand.Parameters.AddWithValue("@szolgaltatasKategoria", txtServiceName.Text.Trim());
-                            updateWorkerCommand.Parameters.AddWithValue("@szolgaltatasIdotartam", txtServicePrice.Text.Trim());
-                            updateWorkerCommand.Parameters.AddWithValue("@szolgaltatasAr", cbServiceTime.SelectedItem);
+                            updateWorkerCommand.Parameters.AddWithValue("@szolgaltatasIdotartam", cbServiceTime.SelectedItem);
+                            updateWorkerCommand.Parameters.AddWithValue("@szolgaltatasAr", txtServicePrice.Text.Trim());
                             updateWorkerCommand.Parameters.AddWithValue("@szolgaltatasID", editServiceId);
 
                             await updateWorkerCommand.ExecuteNonQueryAsync();

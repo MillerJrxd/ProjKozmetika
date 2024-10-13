@@ -1,19 +1,7 @@
 ﻿using MySqlConnector;
 using ProjKozmetika.Classes;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ProjKozmetika
 {
@@ -83,7 +71,7 @@ namespace ProjKozmetika
             }
             else
             {
-                MessageBox.Show("Kérlek, válassz ki egy szolgáltatást a módosításhoz.", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Kérlek válassz ki egy szolgáltatást a módosításhoz.", "Hiba", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

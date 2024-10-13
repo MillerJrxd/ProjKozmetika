@@ -1,13 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using ProjKozmetika.Classes;
+﻿using System.Windows;
 
 namespace ProjKozmetika
 {
-    
+
     public partial class MainWindow : Window
     {
         public MainWindow()

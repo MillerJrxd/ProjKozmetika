@@ -155,7 +155,6 @@ namespace ProjKozmetika
                 {
                     await conn.OpenAsync();
 
-                    // Ellenőrizzük, hogy az ügyfél már létezik-e
                     string checkCustomerQuery = @"SELECT ugyfelID FROM Ügyfél 
                                    WHERE ugyfelFirstName = @ugyfelFirstName 
                                    AND ugyfelLastName = @ugyfelLastName 
@@ -177,9 +176,8 @@ namespace ProjKozmetika
                         {
                             ugyfelID = Convert.ToInt32(result);
                         }
-                        else // Ügyfél nem létezik, hozzáadjuk
+                        else
                         {
-                            // Ügyfél hozzáadása az Ügyfél táblába
                             string addCustomerQuery = @"INSERT INTO Ügyfél (ugyfelFirstName, ugyfelLastName, ugyfelTel, ugyfelEmail, ugyfelPontok) 
                                          VALUES (@ugyfelFirstName, @ugyfelLastName, @ugyfelTel, @ugyfelEmail, @ugyfelPontok)";
 
@@ -200,7 +198,6 @@ namespace ProjKozmetika
                             }
                         }
                     }
-                    // Foglalás időpontok kiszámítása
                     TimeSpan foglalasStart = (TimeSpan)cbDate.SelectedItem;
                     TimeSpan foglalasEnd = foglalasStart.Add(selectedService.SzolgaltatasIdeje);
 
@@ -211,7 +208,7 @@ namespace ProjKozmetika
                     {
                         addReservationCommand.Parameters.AddWithValue("@szolgaltatasID", selectedService.SzolgID);
                         addReservationCommand.Parameters.AddWithValue("@dolgozoID", selectedWorker.DolgozoId);
-                        addReservationCommand.Parameters.AddWithValue("@ugyfelID", ugyfelID);  // A lekérdezett vagy újonnan beszúrt ügyfél ID-t használjuk
+                        addReservationCommand.Parameters.AddWithValue("@ugyfelID", ugyfelID); 
                         addReservationCommand.Parameters.AddWithValue("@foglalasStart", cbDate.SelectedItem);
                         addReservationCommand.Parameters.AddWithValue("@foglalasEnd", foglalasEnd);
 
@@ -267,13 +264,13 @@ namespace ProjKozmetika
             {
                 int unicodeValue = char.ConvertToUtf32(e.Text, 0);
 
-                if ((unicodeValue >= 0x1F600 && unicodeValue <= 0x1F64F) ||   // Arcok
-                  (unicodeValue >= 0x1F300 && unicodeValue <= 0x1F5FF) ||   // Piktogramok
-                  (unicodeValue >= 0x1F680 && unicodeValue <= 0x1F6FF) ||   // Szállítás és térképek
-                  (unicodeValue >= 0x2600 && unicodeValue <= 0x26FF) ||    // Szimbólumok
-                  (unicodeValue >= 0x2700 && unicodeValue <= 0x27BF))       // Dingbatok
+                if ((unicodeValue >= 0x1F600 && unicodeValue <= 0x1F64F) ||   
+                  (unicodeValue >= 0x1F300 && unicodeValue <= 0x1F5FF) ||   
+                  (unicodeValue >= 0x1F680 && unicodeValue <= 0x1F6FF) ||  
+                  (unicodeValue >= 0x2600 && unicodeValue <= 0x26FF) ||    
+                  (unicodeValue >= 0x2700 && unicodeValue <= 0x27BF))     
                 {
-                    e.Handled = true; // Megakadályozzuk a bevitel
+                    e.Handled = true;
                     return;
                 }
             }
@@ -297,8 +294,8 @@ namespace ProjKozmetika
         }
         private async Task FilterAvailableTimesAsync(Dolgozo selectedWorker, Szolgaltatas selectedService, DateTime selectedDate)
         {
-            TimeSpan openingTime = new TimeSpan(8, 0, 0); // 8:00
-            TimeSpan closingTime = new TimeSpan(17, 0, 0); // 17:00
+            TimeSpan openingTime = new TimeSpan(8, 0, 0);
+            TimeSpan closingTime = new TimeSpan(17, 0, 0); 
 
             using (var conn = new MySqlConnection(MainWindow.ConnectionString()))
             {
@@ -328,7 +325,6 @@ namespace ProjKozmetika
                         TimeSpan interval = new TimeSpan(0, 15, 0);
                         times.Clear();
 
-                        // Végigmegyünk az időpontokon és ellenőrizzük, hogy elérhető-e
                         for (TimeSpan time = openingTime; time + selectedService.SzolgaltatasIdeje <= closingTime; time += interval)
                         {
                             bool isAvailable = true;
@@ -338,7 +334,6 @@ namespace ProjKozmetika
                                 TimeSpan bookingStart = booking.Item1;
                                 TimeSpan bookingEnd = booking.Item2;
 
-                                // Ha az időpont beleesik egy másik foglalásba, nem elérhető
                                 if (time < bookingEnd && (time + selectedService.SzolgaltatasIdeje) > bookingStart)
                                 {
                                     isAvailable = false;
