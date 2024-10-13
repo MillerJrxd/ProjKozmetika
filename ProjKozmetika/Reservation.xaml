@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjKozmetika"
         mc:Ignorable="d"
-        Title="Foglalás" MaxHeight="450" MinHeight="450" MaxWidth="900" MinWidth="610"  Height="450" Width="850"  WindowStartupLocation="CenterScreen">
+        Title="Foglalás" MaxHeight="450" MinHeight="450" MaxWidth="850" MinWidth="850"  Height="450" Width="850"  WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.Background>

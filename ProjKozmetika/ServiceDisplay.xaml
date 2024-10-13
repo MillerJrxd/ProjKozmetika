@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjKozmetika"
         mc:Ignorable="d"
-        Title="ServiceDisplay" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ServiceDisplay" Height="450" Width="800" MinHeight="450" MinWidth="800" MaxHeight="450" MaxWidth="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#96485E94" Offset="1"/>
-                <GradientStop Color="#FFEB97F9" Offset="0"/>
+                <GradientStop Color="#96FB0861" Offset="1"/>
+                <GradientStop Color="#FFD629E0" Offset="0"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -29,6 +29,23 @@
                 <DataGridTextColumn Header="Szolgáltatás Ára" Binding="{Binding SzolgáltatásÁra}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnModifyServices" Grid.Column="1" Content="Szolgáltatás módosítása" HorizontalAlignment="Center" Height="39" Margin="0,198,0,0" VerticalAlignment="Top" Width="165" FontSize="15" Background="#4CFFFFFF" Grid.RowSpan="2" Click="btnModifyServices_Click"/>
+
+        <Button x:Name="btnModifyServices" Grid.Column="1" Content="Módosítás" HorizontalAlignment="Center" Height="39" Margin="0,137,0,0" VerticalAlignment="Top" Width="165" FontSize="20" Click="btnModifyServices_Click" Foreground="White" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE669B2"/>
+                    <GradientStop Color="#FF3DACC4" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Image HorizontalAlignment="Left" Height="219" Margin="590,17,0,0" VerticalAlignment="Top" Width="210" Source="/Images/virag.png" Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

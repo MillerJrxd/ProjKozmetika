@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjKozmetika"
         mc:Ignorable="d"
-        Title="Service" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Új szolgáltatás" Height="450" Width="600" MinHeight="450" MinWidth="600" MaxHeight="450" MaxWidth="600" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#96485E94" Offset="1"/>
-                <GradientStop Color="#FFEB97F9" Offset="0"/>
+                <GradientStop Color="#96EF08DC" Offset="0"/>
+                <GradientStop Color="#FF9329E0" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.RowDefinitions>
@@ -22,18 +22,67 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="304,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Szolgáltatás neve"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtServiceName" HorizontalAlignment="Left" Height="25" Margin="298,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewTextInputString"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="312,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Szolgáltatás Ára"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <TextBox x:Name="txtServicePrice" HorizontalAlignment="Left" Height="25" Margin="298,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="#FF2C303A" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewNumInput"/>
-        <Button x:Name="btnServiceSubmit" Content="Felvétel" HorizontalAlignment="Left" Height="43" Margin="309,142,0,0" Grid.Row="1" VerticalAlignment="Top" Width="157" Background="#4CFFFFFF" FontFamily="Century Gothic" FontSize="17" Click="btnServiceSubmit_Click"/>
-        <TextBlock HorizontalAlignment="Left" Height="28" Margin="306,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" FontSize="18" FontFamily="Century Gothic"><Run Language="hu-hu" Text="Szolgáltatás Ideje"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
-        <ComboBox x:Name="cbServiceTime" HorizontalAlignment="Left" Height="40" Margin="298,13,0,0" Grid.Row="1" VerticalAlignment="Top" Width="180" ItemsSource="{Binding Times}">
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="18" FontFamily="Century Gothic" Foreground="White"><Run Language="hu-hu" Text="Szolgáltatás neve"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+       
+        <TextBox x:Name="txtServiceName" HorizontalAlignment="Center" Height="25" Margin="0,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewTextInputString" Foreground="White">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <TextBlock HorizontalAlignment="Center" Height="23" Margin="0,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FontSize="18" FontFamily="Century Gothic" Foreground="White"><Run Language="hu-hu" Text="Szolgáltatás Ára"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        
+        <TextBox x:Name="txtServicePrice" HorizontalAlignment="Center" Height="25" Margin="0,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontFamily="Century Gothic" FontSize="17" Background="#4CFFFFFF" BorderBrush="White" SelectionBrush="#FFF7F7E9" CommandManager.PreviewExecuted="PreviewAppCommandsExecuted" PreviewTextInput="PreviewNumInput" Foreground="White">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TextBox">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <Button x:Name="btnServiceSubmit" Content="Felvétel" HorizontalAlignment="Center" Height="43" Grid.Row="1" VerticalAlignment="Top" Width="156" FontFamily="Century Gothic" FontSize="17" Click="btnServiceSubmit_Click" Margin="0,138,0,0" Foreground="White" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE669B2"/>
+                    <GradientStop Color="#FF3DACC4" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <TextBlock HorizontalAlignment="Center" Height="28" Margin="0,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="18" FontFamily="Century Gothic" Grid.Row="1" Foreground="White"><Run Language="hu-hu" Text="Szolgáltatás Ideje"/><LineBreak/><Run Language="hu-hu"/></TextBlock>
+        <ComboBox x:Name="cbServiceTime" HorizontalAlignment="Center" Height="40" Grid.Row="1" VerticalAlignment="Top" Width="180" ItemsSource="{Binding Times}" Margin="0,69,0,0">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding StringFormat='{}{0:hh\\:mm\\:ss}'}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+       
     </Grid>
 </Window>
