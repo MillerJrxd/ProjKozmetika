@@ -1,24 +1,47 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace ProjKozmetika
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void btnNewReservation_Click(object sender, RoutedEventArgs e)
+        {
+            Reservation reservation = new Reservation();
+            reservation.ShowDialog();
+        }
+        private void btnReservationShow_Click(object sender, RoutedEventArgs e)
+        {
+            ReservationDisplay reservationDisplay = new ReservationDisplay();
+            reservationDisplay.ShowDialog();
+        }
+        private void btnNewWorker_Click(object sender, RoutedEventArgs e)
+        {
+            Worker worker = new Worker(false);
+            worker.ShowDialog();
+        }
+        private void btnWorkerEdit_Click(object sender, RoutedEventArgs e)
+        {
+            WorkerDisplay workerDisplay = new WorkerDisplay();
+            workerDisplay.ShowDialog();
+        }
+        private void btnServiceEdit_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceDisplay serviceDisplay = new ServiceDisplay();
+            serviceDisplay.ShowDialog();
+        }
+        private void btnNewService_Click(object sender, RoutedEventArgs e)
+        {
+            Service service = new Service(false);
+            service.ShowDialog();
+        }
+        public static string ConnectionString()
+        {
+            return "server=localhost;port=3306;uid=root;database=kozmetika";
         }
     }
 }
